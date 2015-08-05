@@ -200,6 +200,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   rails (= 4.2.1)
+  responders
   rspec-rails (~> 3.0)
   rspec_api_documentation
   sass-rails (~> 5.0)

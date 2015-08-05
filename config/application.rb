@@ -17,6 +17,9 @@ Bundler.require(*Rails.groups)
 
 module CanaryApi
   class Application < Rails::Application
+    # Use the responders controller from the responders gem
+    config.app_generators.scaffold_controller :responders_controller
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -31,5 +34,10 @@ module CanaryApi
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    # This gem also includes a responders controller generator, 
+    # so your scaffold can be customized to use respond_with instead of default respond_to blocks. 
+    # From 2.1, you need to explicitly opt-in to use this generator by adding the following to your config/application.rb:
+    config.app_generators.scaffold_controller :responders_controller
   end
 end

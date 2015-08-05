@@ -34,6 +34,9 @@ gem 'rspec_api_documentation'
 # Simple (but safe) token authentication for Rails apps or API with Devise.
 gem 'simple_token_authentication', '~> 1.0'
 
+# A set of Rails responders to dry up your application
+gem "responders"
+
 ##########################################################################################
 
 # Use ActiveModel has_secure_password
