@@ -31,6 +31,9 @@ gem 'devise'
 # Automatically generate API documentation from RSpec
 gem 'rspec_api_documentation'
 
+# Simple (but safe) token authentication for Rails apps or API with Devise.
+gem 'simple_token_authentication', '~> 1.0'
+
 ##########################################################################################
 
 # Use ActiveModel has_secure_password
