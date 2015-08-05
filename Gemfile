@@ -28,6 +28,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Authentication
 gem 'devise'
 
+# Automatically generate API documentation from RSpec
+gem 'rspec_api_documentation'
+
 ##########################################################################################
 
 # Use ActiveModel has_secure_password
