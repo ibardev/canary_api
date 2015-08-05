@@ -1,4 +1,5 @@
-source 'https://rubygems.org'
+# source 'https://rubygems.org'
+source 'http://ruby.taobao.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -23,6 +24,21 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+##########################################################################################
+# Authentication
+gem 'devise'
+
+# Automatically generate API documentation from RSpec
+gem 'rspec_api_documentation'
+
+# Simple (but safe) token authentication for Rails apps or API with Devise.
+gem 'simple_token_authentication', '~> 1.0'
+
+# A set of Rails responders to dry up your application
+gem "responders"
+
+##########################################################################################
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -41,5 +57,9 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+
+  gem 'rspec-rails', '~> 3.0'
+  gem 'shoulda-matchers'
+  gem "factory_girl_rails", "~> 4.0"
 end
 
