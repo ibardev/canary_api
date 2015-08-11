@@ -29,6 +29,12 @@ class User < ActiveRecord::Base
   :recoverable, :rememberable, :trackable, :validatable,
   authentication_keys: [:phone]
 
+  validates_uniqueness_of :phone
+  validates_presence_of :phone
+  validates :phone, length: { is: 11 }
+
+  
+
   # user phone as the authentication key, so email is not required default
   def email_required?
     false

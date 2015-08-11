@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150805153232) do
+ActiveRecord::Schema.define(version: 20150806051356) do
+
+  create_table "sms_tokens", force: :cascade do |t|
+    t.string   "phone"
+    t.string   "token"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "sms_tokens", ["phone"], name: "index_sms_tokens_on_phone"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
