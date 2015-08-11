@@ -1,4 +1,4 @@
-class SmsTokenController < ApplicationController
+class SmsTokensController < ApplicationController
   respond_to :html, :json
 
   def register

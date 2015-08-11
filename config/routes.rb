@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   
   devise_for :users
 
-  resources :sms_token do
+  resources :sms_tokens, only: [:show] do
     collection do
       post 'register'
     end

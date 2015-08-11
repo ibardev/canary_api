@@ -89,4 +89,20 @@ resource "用户注册登录" do
     end
   end
 
+  post "sms_tokens/register" do
+    parameter :phone, "发送手机号", required: true, scope: :sms_token
+
+    let(:phone) { "11111111111" }
+    let(:raw_post) { params.to_json }
+
+    response_field :id, "验证码ID"
+    response_field :phone, "电话号码"
+
+    example "发送短信验证码" do
+      do_request
+      puts response_body
+      expect(status).to eq(201)
+    end
+  end
+
 end
