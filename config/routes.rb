@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   ######################################################
   # SMS Routes
-  resources :sms_tokens, only:[]  do
+  resources :sms_tokens, only:[:show]  do
     collection do
       post 'register'
     end
