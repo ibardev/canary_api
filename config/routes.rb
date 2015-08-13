@@ -1,12 +1,20 @@
 Rails.application.routes.draw do
-  
-  devise_for :users
 
-  resources :sms_tokens, only: [:show] do
+  ######################################################
+  # SMS Routes
+  resources :sms_tokens, only:[]  do
     collection do
       post 'register'
     end
   end
+  ######################################################
+
+  ######################################################
+  # User Routes
+  devise_for :users
+  resource :user_info, only: [:show, :update]
+
+  ######################################################
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

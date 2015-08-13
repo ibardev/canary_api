@@ -38,6 +38,8 @@ class User < ActiveRecord::Base
 
   validate :sms_token_validate, on: :create
 
+  after_create :add_user_info
+
   def sms_token_validate
     sms_token_obj = SmsToken.find_by(phone: phone)
 
@@ -58,4 +60,9 @@ class User < ActiveRecord::Base
   def email_required?
     false
   end
+
+  private
+    def add_user_info
+      self.create_user_info
+    end
 end

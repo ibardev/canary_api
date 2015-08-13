@@ -20,14 +20,14 @@
 FactoryGirl.define do
   factory :user_info do
     sex 1
-nickname "MyString"
-birth "2015-08-13"
-dest_province "MyString"
-dest_city "MyString"
-province "MyString"
-city "MyString"
-contact_type 1
-contact "MyString"
+    nickname "测试名称"
+    birth "2015-08-13"
+    dest_province "上海"
+    dest_city "上海"
+    province "福建"
+    city "厦门"
+    contact_type 1
+    contact "12371236"
   end
 
 end
