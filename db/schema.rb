@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150806051356) do
+ActiveRecord::Schema.define(version: 20150813092820) do
 
   create_table "sms_tokens", force: :cascade do |t|
     t.string   "phone"
@@ -21,6 +21,24 @@ ActiveRecord::Schema.define(version: 20150806051356) do
   end
 
   add_index "sms_tokens", ["phone"], name: "index_sms_tokens_on_phone"
+
+  create_table "user_infos", force: :cascade do |t|
+    t.integer  "sex"
+    t.string   "nickname"
+    t.date     "birth"
+    t.string   "dest_province"
+    t.string   "dest_city"
+    t.string   "province"
+    t.string   "city"
+    t.integer  "contact_type"
+    t.string   "contact"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "user_id"
+  end
+
+  add_index "user_infos", ["sex"], name: "index_user_infos_on_sex"
+  add_index "user_infos", ["user_id"], name: "index_user_infos_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

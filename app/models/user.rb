@@ -24,6 +24,7 @@ class User < ActiveRecord::Base
   acts_as_token_authenticatable
 
   attr_accessor :sms_token
+  has_one :user_info, dependent: :destroy
   
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
