@@ -19,6 +19,11 @@ class SmsToken < ActiveRecord::Base
       result = ChinaSMS.to phone, {company: company, code: token}, {tpl_id: 2}
     end
 
-    sms_token = SmsToken.find_or_create_by phone: phone, token: token
+    sms_token = SmsToken.find_or_initialize_by phone: phone
+    sms_token.token = token
+    sms_token.save
+
+    sms_token
+
   end
 end
