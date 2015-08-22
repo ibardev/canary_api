@@ -31,7 +31,7 @@ resource "用户相关接口" do
 
     parameter :nickname, "昵称", required: false, scope: :user_info
     parameter :birth, "生日", required: false, scope: :user_info
-    parameter :sex, "性别", required: false, scope: :user_info
+    parameter :sex, "性别【男: male, 女: female】", required: false, scope: :user_info
     parameter :dest_province, "目的地省份", required: false, scope: :user_info
     parameter :dest_city, "目的地城市", required: false, scope: :user_info
     parameter :province, "所在省份", required: false, scope: :user_info
@@ -57,6 +57,26 @@ resource "用户相关接口" do
       do_request
       expect(status).to eq(200)
     end
+  end
+
+  post "user_info/check" do
+    parameter :phone, "手机号", required: true, scope: :user_info
+
+    user_attrs = FactoryGirl.attributes_for(:user)
+
+    let(:phone) { user_attrs[:phone] }
+
+    example "用户已注册" do
+      create(:user)
+      do_request
+      expect(status).to eq(200)
+    end
+
+    example "用户未注册" do
+      do_request
+      expect(status).to eq(200)
+    end
+
   end
 
 end

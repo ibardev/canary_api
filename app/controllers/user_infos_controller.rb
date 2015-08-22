@@ -1,10 +1,16 @@
 class UserInfosController < ApplicationController
 
-  acts_as_token_authentication_handler_for User 
+  acts_as_token_authentication_handler_for User, except: [:check] 
 
   before_action :set_user_info, only: [:show, :edit, :update, :destroy]
 
   respond_to :html, :json
+
+  def check
+    phone = check_params[:phone]
+    @check_result = User.exists? phone: phone
+    respond_with(@check_result)
+  end
 
   def index
     @user_infos = UserInfo.all
@@ -54,6 +60,12 @@ class UserInfosController < ApplicationController
       params.require(:user_info).permit(
         :sex, :nickname, :birth, :dest_province, :dest_city,
         :province, :city, :contact_type, :contact
+        )
+    end
+
+    def check_params
+      params.require(:user_info).permit(
+        :phone
         )
     end
 end
