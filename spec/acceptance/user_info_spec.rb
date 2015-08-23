@@ -59,24 +59,4 @@ resource "用户相关接口" do
     end
   end
 
-  post "user_info/check" do
-    parameter :phone, "手机号", required: true, scope: :user_info
-
-    user_attrs = FactoryGirl.attributes_for(:user)
-
-    let(:phone) { user_attrs[:phone] }
-
-    example "用户已注册" do
-      create(:user)
-      do_request
-      expect(status).to eq(200)
-    end
-
-    example "用户未注册" do
-      do_request
-      expect(status).to eq(200)
-    end
-
-  end
-
 end

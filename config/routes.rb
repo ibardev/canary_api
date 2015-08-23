@@ -12,9 +12,11 @@ Rails.application.routes.draw do
   ######################################################
   # User Routes
   devise_for :users
+
   resource :user_info, only: [:show, :update] do
     collection do
       post 'check'
+      post 'reset'
     end
   end
 

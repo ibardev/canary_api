@@ -36,7 +36,7 @@ class User < ActiveRecord::Base
   validates_presence_of :phone
   validates :phone, length: { is: 11 }
 
-  validate :sms_token_validate, on: :create
+  validate :sms_token_validate
 
   after_create :add_user_info
 
@@ -54,7 +54,21 @@ class User < ActiveRecord::Base
     end
   end
 
-  
+  def self.reset_user_password params
+    phone = params[:phone]
+    password = params[:password]
+    sms_token = params[:sms_token]
+    user = User.find_by phone: phone
+    if user.present?
+      user.password = password
+      user.sms_token = sms_token
+      user.save
+    else
+      user = User.new
+      user.errors.add(:phone, "对应的用户不存在")
+    end
+    user
+  end
 
   # user phone as the authentication key, so email is not required default
   def email_required?
