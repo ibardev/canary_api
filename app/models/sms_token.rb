@@ -8,6 +8,10 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
+# Indexes
+#
+#  index_sms_tokens_on_phone  (phone)
+#
 
 class SmsToken < ActiveRecord::Base
   def self.register phone

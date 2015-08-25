@@ -18,6 +18,13 @@
 #  authentication_token   :string
 #  phone                  :string
 #
+# Indexes
+#
+#  index_users_on_authentication_token  (authentication_token)
+#  index_users_on_email                 (email)
+#  index_users_on_phone                 (phone) UNIQUE
+#  index_users_on_reset_password_token  (reset_password_token) UNIQUE
+#
 
 FactoryGirl.define do
   factory :user do

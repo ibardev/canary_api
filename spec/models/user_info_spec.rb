@@ -16,6 +16,11 @@
 #  updated_at    :datetime         not null
 #  user_id       :integer
 #
+# Indexes
+#
+#  index_user_infos_on_sex      (sex)
+#  index_user_infos_on_user_id  (user_id)
+#
 
 require 'rails_helper'
 
