@@ -40,6 +40,9 @@ gem 'simple_token_authentication', '~> 1.0'
 # A set of Rails responders to dry up your application
 gem "responders"
 
+# Paperclip is distributed as a gem, which is how it should be used in your app.
+gem "paperclip", "~> 4.3"
+
 ##########################################################################################
 
 # Use ActiveModel has_secure_password
