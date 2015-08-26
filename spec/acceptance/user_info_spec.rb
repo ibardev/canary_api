@@ -2,6 +2,7 @@ require 'acceptance_helper'
 
 resource "用户相关接口" do
   header "Accept", "application/json"
+  header "Content-Type", "application/json"
 
   get "user_info" do
     user_attrs = FactoryGirl.attributes_for(:user)
@@ -48,6 +49,7 @@ resource "用户相关接口" do
     let(:city) {"南京"}
     let(:contact_type) {"wechat"}
     let(:contact) {"1123123"}
+    let(:raw_post) { params.to_json }
 
     before do
       @user = create(:user)

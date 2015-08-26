@@ -2,7 +2,7 @@ require 'acceptance_helper'
 
 resource "用户注册登录" do
   header "Accept", "application/json"
-  # header "Content-Type", "application/json"
+  header "Content-Type", "application/json"
 
   post "/users" do
     parameter :phone, "用户注册的手机号码", required: true, scope: :user
@@ -16,7 +16,7 @@ resource "用户注册登录" do
       let(:phone) { sms_attrs[:phone] }
       let(:password) { user_attrs[:password] }
       let(:sms_token) { sms_attrs[:token] }
-      # let(:raw_post) { params.to_json }
+      let(:raw_post) { params.to_json }
 
       response_field :id, "用户ID"
       response_field :email, "邮箱"
@@ -37,7 +37,7 @@ resource "用户注册登录" do
       let(:phone) { sms_attrs[:phone] }
       let(:password) { user_attrs[:password] }
       let(:sms_token) { sms_attrs[:token] }
-      # let(:raw_post) { params.to_json }
+      let(:raw_post) { params.to_json }
 
       example "用户注册失败（验证码未获取）" do
         do_request
@@ -48,7 +48,7 @@ resource "用户注册登录" do
       let(:phone) { sms_attrs[:phone] }
       let(:password) { user_attrs[:password] }
       let(:sms_token) { "323232" }
-      # let(:raw_post) { params.to_json }
+      let(:raw_post) { params.to_json }
 
       example "用户注册失败（验证码错误）" do
         create :sms_token
@@ -73,7 +73,7 @@ resource "用户注册登录" do
     user_attrs = FactoryGirl.attributes_for :user
     let(:phone) { user_attrs[:phone] }
     let(:password) { user_attrs[:password] }
-    # let(:raw_post) { params.to_json }
+    let(:raw_post) { params.to_json }
 
     response_field :id, "用户ID"
     response_field :email, "邮箱"
@@ -93,7 +93,7 @@ resource "用户注册登录" do
     parameter :phone, "发送手机号", required: true, scope: :sms_token
 
     let(:phone) { "11111111111" }
-    # let(:raw_post) { params.to_json }
+    let(:raw_post) { params.to_json }
 
     response_field :id, "验证码ID"
     response_field :phone, "电话号码"
@@ -111,6 +111,7 @@ resource "用户注册登录" do
     user_attrs = FactoryGirl.attributes_for(:user)
 
     let(:phone) { user_attrs[:phone] }
+    let(:raw_post) { params.to_json }
 
     example "用户已注册" do
       create(:user)
@@ -129,6 +130,7 @@ resource "用户注册登录" do
     parameter :phone, "手机号", required: true, scope: :user
     parameter :password, "密码", required: true, scope: :user
     parameter :sms_token, "短消息", required: true, scope: :user
+    let(:raw_post) { params.to_json }
 
     describe "重置密码成功" do
       before do
@@ -151,6 +153,7 @@ resource "用户注册登录" do
       user_attrs = FactoryGirl.attributes_for :user
       let(:phone) { user_attrs[:phone] }
       let(:password) { user_attrs[:password] }
+      let(:raw_post) { params.to_json }
       
       example "用户重置密码失败（用户不存在）" do
         do_request
