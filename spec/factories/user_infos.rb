@@ -37,6 +37,7 @@ FactoryGirl.define do
     city "厦门"
     contact_type 1
     contact "12371236"
+    avatar {Rack::Test::UploadedFile.new('./spec/asset/news.png', 'image/png')}
   end
 
 end

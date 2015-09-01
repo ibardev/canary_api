@@ -32,10 +32,13 @@ class UserInfo < ActiveRecord::Base
   enum sex: [:male, :female]
   enum contact_type: [:wechat, :qq]
 
+  has_attached_file :avatar, styles: { mini: '48x48>', small: '100x100>', medium: '200x200>', product: '320x320>', large: '600x600>' } 
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
+
   def age
     return "" if birth.blank?
     now = Time.now.utc.to_date
-    now.year - birth.year - (birth.to_date.change(:year => now.year) > now ? 1 : 0)
+    now.year - birth.year - (birth.to_date.change(year: now.year) > now ? 1 : 0)
   end
 
   def constellation
