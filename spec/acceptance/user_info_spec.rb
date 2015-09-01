@@ -39,6 +39,7 @@ resource "用户相关接口" do
     parameter :city, "所在城市", required: false, scope: :user_info
     parameter :contact_type, "联系类型", required: false, scope: :user_info
     parameter :contact, "联系方式", required: false, scope: :user_info
+    parameter :slogan, "用户签名", required: false, scope: :user_info
     parameter :avatar, "用户头像", required: false, scope: :user_info
 
     let(:nickname) { "测试名称" }
@@ -50,6 +51,7 @@ resource "用户相关接口" do
     let(:city) {"南京"}
     let(:contact_type) {"wechat"}
     let(:contact) {"1123123"}
+    let(:slogan) {"用户签名"}
     let(:avatar) { user_info_attrs[:avatar] }
     # let(:raw_post) { params.to_json }
 
@@ -59,7 +61,7 @@ resource "用户相关接口" do
 
     example "用户修改自己的信息成功" do
       do_request
-      puts response_body
+      # puts response_body
       expect(status).to eq(200)
     end
   end
