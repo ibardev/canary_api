@@ -20,6 +20,16 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :friends, only: [:index, :show] do
+    member do
+      post 'follow'
+    end
+    collection do
+      get 'collected'
+      get 'followed'
+    end
+  end
+
   ######################################################
 
   # The priority is based upon order of creation: first created -> highest priority.

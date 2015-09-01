@@ -39,6 +39,7 @@ FactoryGirl.define do
     contact_type 1
     contact "12371236"
     avatar {Rack::Test::UploadedFile.new('./spec/asset/news.png', 'image/png')}
+    slogan "用户签名"
   end
 
 end
