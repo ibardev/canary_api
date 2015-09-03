@@ -6,6 +6,10 @@ class SmsTokensController < ApplicationController
     respond_with(@sms_token)
   end
 
+  def show
+    @sms_token = SmsToken.find_by params[:id]
+  end
+
   private
 
     def sms_token_params
