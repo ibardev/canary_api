@@ -21,6 +21,8 @@
 #  avatar_updated_at   :datetime
 #  slogan              :string
 #  carreer             :integer
+#  flight              :string
+#  train               :string
 #
 # Indexes
 #

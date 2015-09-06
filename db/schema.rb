@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150903155032) do
+ActiveRecord::Schema.define(version: 20150906091709) do
 
   create_table "sms_tokens", force: :cascade do |t|
     t.string   "phone"
@@ -41,6 +41,8 @@ ActiveRecord::Schema.define(version: 20150903155032) do
     t.datetime "avatar_updated_at"
     t.string   "slogan"
     t.integer  "carreer"
+    t.string   "flight"
+    t.string   "train"
   end
 
   add_index "user_infos", ["sex"], name: "index_user_infos_on_sex"

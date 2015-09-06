@@ -21,6 +21,8 @@
 #  avatar_updated_at   :datetime
 #  slogan              :string
 #  carreer             :integer
+#  flight              :string
+#  train               :string
 #
 # Indexes
 #
@@ -42,6 +44,8 @@ FactoryGirl.define do
     avatar {Rack::Test::UploadedFile.new('./spec/asset/news.png', 'image/png')}
     slogan "用户签名"
     carreer "manager"
+    flight "航班"
+    train "列车次"
   end
 
 end
