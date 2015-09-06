@@ -44,6 +44,7 @@ resource "用户相关接口" do
     parameter :carreer, "用户职业【学生: student, 职员: officer, 高管: manager, 其他: other】", required: false, scope: :user_info
     parameter :flight, "航班号", required: false, scope: :user_info
     parameter :train, "高铁车次", required: false, scope: :user_info
+    parameter :hotel_type, "酒店类型【经济型连锁: economy, 三星级舒适: comfortable, 四星级高档: commercial, 五星级豪华: luxury】", required: false, scope: :user_info
 
     let(:nickname) { "测试名称" }
     let(:birth) {"2008-5-28"}
@@ -59,6 +60,7 @@ resource "用户相关接口" do
     let(:carreer) { "student" }
     let(:flight) { "航班号" }
     let(:train) { "高铁车次" }
+    let(:hotel_type) { "luxury" }
     # let(:raw_post) { params.to_json }
 
     before do

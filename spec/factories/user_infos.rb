@@ -23,6 +23,7 @@
 #  carreer             :integer
 #  flight              :string
 #  train               :string
+#  hotel_type          :integer
 #
 # Indexes
 #
@@ -46,6 +47,7 @@ FactoryGirl.define do
     carreer "manager"
     flight "航班"
     train "列车次"
+    hotel_type "luxury"
   end
 
 end

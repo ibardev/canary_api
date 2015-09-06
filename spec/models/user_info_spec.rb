@@ -23,6 +23,7 @@
 #  carreer             :integer
 #  flight              :string
 #  train               :string
+#  hotel_type          :integer
 #
 # Indexes
 #
