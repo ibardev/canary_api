@@ -20,6 +20,7 @@
 #  avatar_file_size    :integer
 #  avatar_updated_at   :datetime
 #  slogan              :string
+#  carreer             :integer
 #
 # Indexes
 #
@@ -32,6 +33,7 @@ class UserInfo < ActiveRecord::Base
 
   enum sex: [:male, :female]
   enum contact_type: [:wechat, :qq]
+  enum carreer: { student: 0, officer: 1, manager: 2, others: 3 }
 
   has_attached_file :avatar, styles: { mini: '48x48>', small: '100x100>', medium: '200x200>', product: '320x320>', large: '600x600>' } 
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/

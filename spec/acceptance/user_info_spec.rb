@@ -41,6 +41,7 @@ resource "用户相关接口" do
     parameter :contact, "联系方式", required: false, scope: :user_info
     parameter :slogan, "用户签名", required: false, scope: :user_info
     parameter :avatar, "用户头像", required: false, scope: :user_info
+    parameter :carreer, "用户职业【学生: student, 职员: officer, 高管: manager, 其他: other】", required: false, scope: :user_info
 
     let(:nickname) { "测试名称" }
     let(:birth) {"2008-5-28"}
@@ -53,6 +54,7 @@ resource "用户相关接口" do
     let(:contact) {"1123123"}
     let(:slogan) {"用户签名"}
     let(:avatar) { user_info_attrs[:avatar] }
+    let(:carreer) { "student" }
     # let(:raw_post) { params.to_json }
 
     before do

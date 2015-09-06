@@ -20,6 +20,7 @@
 #  avatar_file_size    :integer
 #  avatar_updated_at   :datetime
 #  slogan              :string
+#  carreer             :integer
 #
 # Indexes
 #

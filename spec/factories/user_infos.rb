@@ -20,6 +20,7 @@
 #  avatar_file_size    :integer
 #  avatar_updated_at   :datetime
 #  slogan              :string
+#  carreer             :integer
 #
 # Indexes
 #
@@ -40,6 +41,7 @@ FactoryGirl.define do
     contact "12371236"
     avatar {Rack::Test::UploadedFile.new('./spec/asset/news.png', 'image/png')}
     slogan "用户签名"
+    carreer "manager"
   end
 
 end
