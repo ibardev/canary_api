@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150906095534) do
+ActiveRecord::Schema.define(version: 20150915125350) do
+
+  create_table "invite_discovers", force: :cascade do |t|
+    t.integer  "user_id"
+    t.date     "begin_date"
+    t.date     "end_date"
+    t.text     "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "invite_discovers", ["user_id"], name: "index_invite_discovers_on_user_id"
 
   create_table "sms_tokens", force: :cascade do |t|
     t.string   "phone"
@@ -21,6 +32,14 @@ ActiveRecord::Schema.define(version: 20150906095534) do
   end
 
   add_index "sms_tokens", ["phone"], name: "index_sms_tokens_on_phone"
+
+  create_table "user_discovers", force: :cascade do |t|
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "user_discovers", ["user_id"], name: "index_user_discovers_on_user_id"
 
   create_table "user_infos", force: :cascade do |t|
     t.integer  "sex"
