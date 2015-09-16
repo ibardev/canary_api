@@ -17,10 +17,11 @@
 
 FactoryGirl.define do
   factory :invite_discover do
-    user nil
-begin_date "2015-09-15"
-end_date "2015-09-15"
-content "MyText"
+    begin_date "2015-09-15"
+    end_date "2015-09-15"
+    content "MyText"
+    # association :images, factory: :image
+    
   end
 
 end

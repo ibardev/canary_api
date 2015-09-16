@@ -20,10 +20,11 @@
 #
 
 FactoryGirl.define do
+  
   factory :image do
-    type ""
-photo_type "MyString"
-imageable nil
+    # title "MyString"
+    photo_type "photo type"
+    photo {Rack::Test::UploadedFile.new('./spec/asset/news.png', 'image/png')}
   end
 
 end

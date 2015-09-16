@@ -1,0 +1,17 @@
+<%= form_for(@invite_discover) do |f| %>
+  <% if @invite_discover.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@invite_discover.errors.count, "error") %> prohibited this invite_discover from being saved:</h2>
+
+      <ul>
+      <% @invite_discover.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

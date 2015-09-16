@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Invite Discovers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @invite_discovers.each do |invite_discover| %>
+      <tr>
+        <td><%= link_to 'Show', invite_discover %></td>
+        <td><%= link_to 'Edit', edit_invite_discover_path(invite_discover) %></td>
+        <td><%= link_to 'Destroy', invite_discover, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Invite discover', new_invite_discover_path %>
