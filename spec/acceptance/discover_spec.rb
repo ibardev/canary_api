@@ -33,7 +33,7 @@ resource "发现相关接口" do
 
     example "用户发布邀约成功" do
       do_request
-      puts response_body
+      # puts response_body
       expect(status).to eq(200)
     end
 

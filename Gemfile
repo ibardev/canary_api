@@ -43,6 +43,9 @@ gem "responders"
 # Paperclip is distributed as a gem, which is how it should be used in your app.
 gem "paperclip", "~> 4.3"
 
+# Lets you find ActiveRecord objects by year, month, fortnight, week and more!
+gem 'by_star'
+
 ##########################################################################################
 
 # Use ActiveModel has_secure_password

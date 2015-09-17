@@ -41,6 +41,8 @@ GEM
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
+    by_star (2.2.1)
+      activesupport
     byebug (5.0.0)
       columnize (= 0.9.0)
     china_sms (0.0.7)
@@ -211,6 +213,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  by_star
   byebug
   china_sms
   coffee-rails (~> 4.1.0)
