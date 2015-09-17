@@ -20,8 +20,10 @@ FactoryGirl.define do
     begin_date "2015-09-15"
     end_date "2015-09-15"
     content "MyText"
-    # association :images, factory: :image
-    
+
+    after(:build) do |invite|
+      invite.images = create_list(:image, 3)
+    end
   end
 
 end

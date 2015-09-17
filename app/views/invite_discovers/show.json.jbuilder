@@ -6,10 +6,7 @@ if @invite_discover.user
   json.avatar user_info.avatar.present? ? user_info.avatar.url(:medium) : ""
 end
 
-json.small_images @invite_discover.images do |image|
-  json.image_url photo_url(image, :small)
-end
-
-json.big_images @invite_discover.images do |image|
-  json.image_url photo_url(image, :big)
+json.images @invite_discover.images do |image|
+  json.small photo_url(image, :small)
+  json.big photo_url(image, :big)
 end

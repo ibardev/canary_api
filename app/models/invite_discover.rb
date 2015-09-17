@@ -18,6 +18,28 @@
 class InviteDiscover < ActiveRecord::Base
   belongs_to :user
   has_many :images, as: :imageable, dependent: :destroy
+  has_one :discover, as: :discoverable, dependent: :destroy
+  after_create :add_discover
 
   accepts_nested_attributes_for :images
+
+  def as_json options=nil
+    {
+      begin_date: begin_date,
+      end_date: end_date,
+      content: content,
+      images: 
+        images.map do |image|
+          {
+            small: image.photo.url(:small),
+            big: image.photo.url(:big)
+          }
+        end
+    }
+  end
+
+  private
+    def add_discover
+      self.create_discover user: user
+    end
 end

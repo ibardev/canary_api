@@ -38,4 +38,26 @@ resource "发现相关接口" do
 
   end
 
+  get "discovers" do
+    user_attrs = FactoryGirl.attributes_for(:user)
+    user_info_attrs = FactoryGirl.attributes_for(:user_info)
+
+    header "X-User-Token", user_attrs[:authentication_token]
+    header "X-User-Phone", user_attrs[:phone]
+
+    before do
+      @user = create(:user)
+      @user.user_info.update_attributes(user_info_attrs)
+      @invite_discovers = create_list(:invite_discover, 3, user: @user)
+      @user_discovers = create_list(:user_discover, 3, user: @user)
+    end
+
+    example "用户获取发现列表成功" do
+      do_request
+      # puts response_body
+      expect(status).to eq(200)
+    end
+
+  end
+
 end
