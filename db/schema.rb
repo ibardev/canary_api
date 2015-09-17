@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150915132016) do
+ActiveRecord::Schema.define(version: 20150917011232) do
+
+  create_table "discovers", force: :cascade do |t|
+    t.integer  "discoverable_id"
+    t.string   "discoverable_type"
+    t.integer  "user_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  add_index "discovers", ["discoverable_type", "discoverable_id"], name: "index_discovers_on_discoverable_type_and_discoverable_id"
+  add_index "discovers", ["user_id"], name: "index_discovers_on_user_id"
 
   create_table "images", force: :cascade do |t|
     t.string   "type"
