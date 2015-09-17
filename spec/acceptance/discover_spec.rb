@@ -2,7 +2,7 @@ require 'acceptance_helper'
 
 resource "发现相关接口" do
   header "Accept", "application/json"
-  header "Content-Type", "application/json"
+  # header "Content-Type", "application/json"
 
   post "invite_discovers" do
     user_attrs = FactoryGirl.attributes_for(:user)
@@ -17,13 +17,14 @@ resource "发现相关接口" do
     parameter :begin_date, "邀约开始日期", required: true, scope: :invite_discover
     parameter :end_date, "邀约结束日期", required: true, scope: :invite_discover
     parameter :content, "邀约内容", required: true, scope: :invite_discover
-    parameter :images_attributes, "邀约图片", required: true, scope: :invite_discover
+    parameter :images_attributes, "邀约图片", required: false, scope: :invite_discover
 
 
     let(:begin_date) { invite_discover_attrs[:begin_date] }
     let(:end_date) { invite_discover_attrs[:end_date] }
     let(:content) { invite_discover_attrs[:content] }
-    let(:images_attributes) { [image_attrs, image_attrs] }
+    # let(:images_attributes) { [image_attrs, image_attrs] }
+    # let(:images_attributes) { [image_attrs] }
 
     before do
       @user = create(:user)
@@ -32,7 +33,7 @@ resource "发现相关接口" do
 
     example "用户发布邀约成功" do
       do_request
-      # puts response_body
+      puts response_body
       expect(status).to eq(200)
     end
 

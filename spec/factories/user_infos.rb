@@ -34,7 +34,7 @@
 FactoryGirl.define do
   factory :user_info do
     sex 1
-    nickname "测试名称"
+    nickname "nickname"
     birth "2015-08-13"
     dest_province "上海"
     dest_city "上海"
