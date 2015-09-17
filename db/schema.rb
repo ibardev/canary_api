@@ -11,7 +11,44 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150906095534) do
+ActiveRecord::Schema.define(version: 20150917011232) do
+
+  create_table "discovers", force: :cascade do |t|
+    t.integer  "discoverable_id"
+    t.string   "discoverable_type"
+    t.integer  "user_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  add_index "discovers", ["discoverable_type", "discoverable_id"], name: "index_discovers_on_discoverable_type_and_discoverable_id"
+  add_index "discovers", ["user_id"], name: "index_discovers_on_user_id"
+
+  create_table "images", force: :cascade do |t|
+    t.string   "type"
+    t.string   "photo_type"
+    t.integer  "imageable_id"
+    t.string   "imageable_type"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+  end
+
+  add_index "images", ["imageable_type", "imageable_id"], name: "index_images_on_imageable_type_and_imageable_id"
+
+  create_table "invite_discovers", force: :cascade do |t|
+    t.integer  "user_id"
+    t.date     "begin_date"
+    t.date     "end_date"
+    t.text     "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "invite_discovers", ["user_id"], name: "index_invite_discovers_on_user_id"
 
   create_table "sms_tokens", force: :cascade do |t|
     t.string   "phone"
@@ -21,6 +58,14 @@ ActiveRecord::Schema.define(version: 20150906095534) do
   end
 
   add_index "sms_tokens", ["phone"], name: "index_sms_tokens_on_phone"
+
+  create_table "user_discovers", force: :cascade do |t|
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "user_discovers", ["user_id"], name: "index_user_discovers_on_user_id"
 
   create_table "user_infos", force: :cascade do |t|
     t.integer  "sex"

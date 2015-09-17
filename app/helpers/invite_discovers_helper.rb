@@ -1,0 +1,2 @@
+module InviteDiscoversHelper
+end
