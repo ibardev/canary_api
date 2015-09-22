@@ -40,7 +40,7 @@ class UserInfo < ActiveRecord::Base
   enum hotel_type: { economy: 2, comfortable: 3, commercial: 4, luxury: 5 }
 
   has_attached_file :avatar, styles: { mini: '48x48>', small: '100x100>', medium: '200x200>', product: '320x320>', large: '600x600>' } 
-  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
+  validates_attachment_content_type :avatar, content_type: /image\/.*\Z/
 
   def local
     false
