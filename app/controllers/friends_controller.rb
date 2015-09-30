@@ -2,7 +2,7 @@ class FriendsController < ApplicationController
 
   acts_as_token_authentication_handler_for User, except: [:check, :reset] 
 
-  before_action :set_friend, only: [:show, :follow]
+  before_action :set_friend, only: [:show, :follow, :collect]
 
   respond_to :html, :json
 
@@ -16,6 +16,12 @@ class FriendsController < ApplicationController
   end
 
   def follow
+    respond_with(@friend) do |format|
+      format.json { render :show }
+    end
+  end
+
+  def collect
     respond_with(@friend) do |format|
       format.json { render :show }
     end

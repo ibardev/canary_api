@@ -41,7 +41,7 @@ resource "用户相关接口" do
     parameter :contact, "联系方式", required: false, scope: :user_info
     parameter :slogan, "用户签名", required: false, scope: :user_info
     parameter :avatar, "用户头像", required: false, scope: :user_info
-    parameter :carreer, "用户职业【学生: student, 职员: officer, 高管: manager, 其他: other】", required: false, scope: :user_info
+    parameter :carreer, "用户职业【学生: student, 职员: officer, 高管: manager, 其他: others】", required: false, scope: :user_info
     parameter :flight, "航班号", required: false, scope: :user_info
     parameter :train, "高铁车次", required: false, scope: :user_info
     parameter :hotel_type, "酒店类型【经济型连锁: economy, 三星级舒适: comfortable, 四星级高档: commercial, 五星级豪华: luxury】", required: false, scope: :user_info

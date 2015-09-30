@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   resources :friends, only: [:index, :show] do
     member do
       post 'follow'
+      post 'collect'
     end
     collection do
       get 'collected'
