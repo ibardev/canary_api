@@ -11,6 +11,20 @@ class FriendsController < ApplicationController
     respond_with(@friends)
   end
 
+  def local
+    @friends = UserInfo.all
+    respond_with(@friends) do |format|
+      format.json { render :index }
+    end
+  end
+
+  def foreign
+    @friends = UserInfo.all
+    respond_with(@friends) do |format|
+      format.json { render :index }
+    end
+  end
+
   def show
     respond_with(@friend)
   end

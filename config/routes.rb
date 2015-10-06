@@ -29,6 +29,8 @@ Rails.application.routes.draw do
     collection do
       get 'collected'
       get 'followed'
+      get 'local'
+      get 'foreign'
     end
   end
 
