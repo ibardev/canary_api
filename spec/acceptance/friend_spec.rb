@@ -94,6 +94,28 @@ resource "朋友信息相关接口" do
     end
   end
 
+  post "friends/:id/uncollect" do
+
+    user_attrs = FactoryGirl.attributes_for(:user)
+    user_info_attrs = FactoryGirl.attributes_for(:user_info)
+
+    header "X-User-Token", user_attrs[:authentication_token]
+    header "X-User-Phone", user_attrs[:phone]
+
+    before do
+      create(:user)
+      @friend = create(:user_info)
+    end
+    let(:id) { @friend.id }
+
+
+    example "取消收藏朋友成功" do
+      do_request
+      puts response_body
+      expect(status).to eq(200)  
+    end
+  end
+
 
   get "friends/followed" do
     parameter :page, "页码", required: false

@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     member do
       post 'follow'
       post 'collect'
+      post 'uncollect'
     end
     collection do
       get 'collected'
