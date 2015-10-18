@@ -77,6 +77,10 @@ class User < ActiveRecord::Base
     self.voted_up_on? friend, vote_scope: "follow"
   end
 
+  def same_city? friend
+    self.try(:user_info).try(:city) == friend.try(:city)
+  end
+
   def sms_token_validate
     sms_token_obj = SmsToken.find_by(phone: phone)
 

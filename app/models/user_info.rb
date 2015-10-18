@@ -44,9 +44,10 @@ class UserInfo < ActiveRecord::Base
   has_attached_file :avatar, styles: { mini: '48x48>', small: '100x100>', medium: '200x200>', product: '320x320>', large: '600x600>' } 
   validates_attachment_content_type :avatar, content_type: /image\/.*\Z/
 
-  def local
-    false
-  end
+  scope :same_sex, ->(sex) { where(sex: sex) }
+  scope :opposite_sex, ->(sex) { where.not(sex: sex) }
+  scope :local, ->(city) { where(city: city) }
+  scope :foreign, ->(city) { where.not(city: city) }
 
   def age
     return "" if birth.blank?

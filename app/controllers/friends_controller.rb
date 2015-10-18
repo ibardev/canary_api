@@ -7,19 +7,25 @@ class FriendsController < ApplicationController
   respond_to :html, :json
 
   def index
-    @friends = UserInfo.all
+    page = params[:page] || 1
+    per_page = params[:per_page] || 10
+    @friends = UserInfo.opposite_sex(current_user_info.sex).paginate(page: page, per_page: per_page)
     respond_with(@friends)
   end
 
   def local
-    @friends = UserInfo.all
+    page = params[:page] || 1
+    per_page = params[:per_page] || 10
+    @friends = UserInfo.opposite_sex(current_user_info.sex).local(current_user_info.city).paginate(page: page, per_page: per_page)
     respond_with(@friends) do |format|
       format.json { render :index }
     end
   end
 
   def foreign
-    @friends = UserInfo.all
+    page = params[:page] || 1
+    per_page = params[:per_page] || 10
+    @friends = UserInfo.opposite_sex(current_user_info.sex).foreign(current_user_info.city).paginate(page: page, per_page: per_page)
     respond_with(@friends) do |format|
       format.json { render :index }
     end
