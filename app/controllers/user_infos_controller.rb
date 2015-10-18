@@ -54,11 +54,7 @@ class UserInfosController < ApplicationController
 
   private
     def set_user_info
-      if params[:user_info_id].present?
-        @user_info = UserInfo.find(params[:id])
-      else
-        @user_info = current_user.user_info
-      end
+      @user_info = current_user.user_info
     end
 
     def user_info_params

@@ -30,6 +30,7 @@ class FriendsController < ApplicationController
   end
 
   def follow
+    current_user.follow! @friend
     respond_with(@friend) do |format|
       format.json { render :show }
     end
@@ -50,7 +51,9 @@ class FriendsController < ApplicationController
   end
 
   def followed
-    @friends = UserInfo.all
+    page = params[:page] || 1
+    per_page = params[:per_page] || 10
+    @friends = current_user.followers.paginate(page: page, per_page: per_page)
     respond_with(@friends) do |format|
       format.json { render :index }
     end

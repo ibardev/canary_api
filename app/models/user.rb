@@ -64,6 +64,19 @@ class User < ActiveRecord::Base
     self.voted_up_on? friend, vote_scope: "collect"
   end
 
+  def follow! friend
+    self.uncollect! friend
+    self.likes friend, vote_scope: "follow"
+  end
+
+  def followers
+    self.find_liked_items vote_scope: "follow"
+  end
+
+  def followed? friend
+    self.voted_up_on? friend, vote_scope: "follow"
+  end
+
   def sms_token_validate
     sms_token_obj = SmsToken.find_by(phone: phone)
 

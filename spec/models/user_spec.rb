@@ -64,4 +64,39 @@ RSpec.describe User, type: :model do
       expect(user.collections.size).to eq(1)
     end
   end
+
+  describe "User follow" do
+    let(:user) { create(:user) }
+    let(:friend1) { create(:user_info) }
+    let(:friend2) { create(:user_info) }
+
+    it "should follow correctly" do
+      expect(user.followed? friend1).to eq(false)
+      user.follow! friend1
+      expect(user.followed? friend1).to eq(true)
+      expect(user.followed? friend2).to eq(false)
+    end
+
+    it "should follow & collect correctly" do
+      expect(user.followed? friend1).to eq(false)
+      expect(user.collected? friend1).to eq(false)
+      user.collect! friend1
+      expect(user.followed? friend1).to eq(false)
+      expect(user.collected? friend1).to eq(true)
+      user.follow! friend1
+      expect(user.followed? friend1).to eq(true)
+      expect(user.collected? friend1).to eq(false)
+    end
+
+    it "should get followers correctly" do
+      expect(user.followers.size).to eq(0)
+      user.follow! friend1
+      expect(user.followers.size).to eq(1)
+      user.follow! friend1
+      expect(user.followers.size).to eq(1)
+      user.follow! friend2
+      expect(user.followers.size).to eq(2)
+    end
+
+  end
 end
