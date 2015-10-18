@@ -1,4 +1,6 @@
 class DiscoversController < ApplicationController
+  acts_as_token_authentication_handler_for User
+
   before_action :set_discover, only: [:show, :edit, :update, :destroy]
 
   respond_to :html, :json

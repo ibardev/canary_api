@@ -48,10 +48,6 @@ class UserInfo < ActiveRecord::Base
     false
   end
 
-  def collected
-    false
-  end
-
   def age
     return "" if birth.blank?
     now = Time.now.utc.to_date
