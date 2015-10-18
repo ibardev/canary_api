@@ -1,4 +1,5 @@
 require "application_responder"
+require 'will_paginate/array'
 
 class ApplicationController < ActionController::Base
   self.responder = ApplicationResponder

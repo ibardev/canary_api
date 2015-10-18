@@ -30,4 +30,38 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   it { should have_one(:user_info) } 
+
+  describe "User collection" do
+    let(:user) { create(:user) }
+    let(:friend1) { create(:user_info) }
+    let(:friend2) { create(:user_info) }
+
+    it "should collected correctly" do
+      expect(user.collected? friend1).to eq(false)
+      user.collect! friend1
+
+      expect(user.collected? friend1).to eq(true)
+      expect(user.collected? friend2).to eq(false)
+    end
+
+    it "should uncollect correctly" do
+      expect(user.collected? friend1).to eq(false)
+      user.collect! friend1
+      expect(user.collected? friend1).to eq(true)
+      user.uncollect! friend1
+      expect(user.collected? friend1).to eq(false)
+    end
+
+    it "should get collections correctly" do
+      expect(user.collections.size).to eq(0)
+      user.collect! friend1
+      expect(user.collections.size).to eq(1)
+      user.collect! friend1
+      expect(user.collections.size).to eq(1)
+      user.collect! friend2
+      expect(user.collections.size).to eq(2)
+      user.uncollect! friend2
+      expect(user.collections.size).to eq(1)
+    end
+  end
 end

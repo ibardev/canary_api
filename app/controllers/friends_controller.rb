@@ -36,12 +36,14 @@ class FriendsController < ApplicationController
   end
 
   def collect
+    current_user.collect! @friend
     respond_with(@friend) do |format|
       format.json { render :show }
     end
   end
 
   def uncollect
+    current_user.uncollect! @friend
     respond_with(@friend) do |format|
       format.json { render :show }
     end
@@ -55,7 +57,9 @@ class FriendsController < ApplicationController
   end
 
   def collected
-    @friends = UserInfo.all
+    page = params[:page] || 1
+    per_page = params[:per_page] || 10
+    @friends = current_user.collections.paginate(page: page, per_page: per_page)
     respond_with(@friends) do |format|
       format.json { render :index }
     end

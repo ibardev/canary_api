@@ -49,6 +49,9 @@ gem 'by_star'
 # Votable ActiveRecord for Rails
 gem 'acts_as_votable', '~> 0.10.0'
 
+# devide page for list
+gem 'will_paginate', '~> 3.0.6'
+
 ##########################################################################################
 
 # Use ActiveModel has_secure_password

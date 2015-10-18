@@ -29,6 +29,7 @@
 class User < ActiveRecord::Base
   ## Token Authenticatable
   acts_as_token_authenticatable
+  acts_as_voter
 
   attr_accessor :sms_token
   has_one :user_info, dependent: :destroy
@@ -46,6 +47,22 @@ class User < ActiveRecord::Base
   validate :sms_token_validate
 
   after_create :add_user_info
+
+  def collect! friend
+    self.likes friend, vote_scope: "collect"
+  end
+
+  def uncollect! friend
+    self.dislikes friend, vote_scope: "collect"
+  end
+
+  def collections
+    self.find_liked_items vote_scope: "collect"
+  end
+
+  def collected? friend
+    self.voted_up_on? friend, vote_scope: "collect"
+  end
 
   def sms_token_validate
     sms_token_obj = SmsToken.find_by(phone: phone)
