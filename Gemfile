@@ -46,6 +46,9 @@ gem "paperclip", "~> 4.3"
 # Lets you find ActiveRecord objects by year, month, fortnight, week and more!
 gem 'by_star'
 
+# Votable ActiveRecord for Rails
+gem 'acts_as_votable', '~> 0.10.0'
+
 ##########################################################################################
 
 # Use ActiveModel has_secure_password
