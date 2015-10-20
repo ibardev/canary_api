@@ -32,7 +32,7 @@ class InviteDiscover < ActiveRecord::Base
         images.map do |image|
           {
             small: image.photo.url(:small),
-            big: image.photo.url(:big)
+            big: image.photo.url(:product)
           }
         end
     }
