@@ -35,4 +35,10 @@ require 'rails_helper'
 
 RSpec.describe UserInfo, type: :model do
   it { should belong_to(:user) } 
+
+  let(:user) { create(:user) }
+  let(:user_info) { create(:user_info, user: user)}
+  it "should get equal phone" do
+    expect(user.phone).to eq(user_info.phone)
+  end
 end

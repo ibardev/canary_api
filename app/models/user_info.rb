@@ -48,6 +48,8 @@ class UserInfo < ActiveRecord::Base
   scope :opposite_sex, ->(sex) { where.not(sex: sex) }
   scope :local, ->(city) { where(city: city) }
   scope :foreign, ->(city) { where.not(city: city) }
+  
+  delegate :phone, to: :user
 
   def age
     return "" if birth.blank?
