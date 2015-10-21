@@ -52,6 +52,10 @@ gem 'acts_as_votable', '~> 0.10.0'
 # devide page for list
 gem 'will_paginate', '~> 3.0.6'
 
+
+# The administration framework for Ruby on Rails applications. 
+gem 'activeadmin', '~> 1.0.0.pre2'
+
 ##########################################################################################
 
 # Use ActiveModel has_secure_password
