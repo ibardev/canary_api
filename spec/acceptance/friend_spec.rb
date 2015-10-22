@@ -2,7 +2,7 @@ require 'acceptance_helper'
 
 resource "朋友信息相关接口" do
   header "Accept", "application/json"
-  header "Content-Type", "application/json"
+  # header "Content-Type", "application/json"
 
   get "friends" do
     parameter :page, "页码", required: false
@@ -203,6 +203,32 @@ resource "朋友信息相关接口" do
       # puts response_body
       expect(status).to eq(200)
     end
+  end
+
+  post "friends/:id/complains" do
+    parameter :reason, "投诉原因【fake, low, porn, rubbish】", required: true, scope: :complain
+    parameter :comment, "投诉说明", required: false, scope: :complain
+
+    user_attrs = FactoryGirl.attributes_for(:user)
+    user_info_attrs = FactoryGirl.attributes_for(:user_info)
+
+    header "X-User-Token", user_attrs[:authentication_token]
+    header "X-User-Phone", user_attrs[:phone]
+
+    let(:reason) { "fake" }
+    let(:comment) { "This is a comment!" }
+
+    before do
+      @source_compainer = create(:user)
+      @dest_complainer = create(:user_info)
+    end
+
+    example "投诉相关人员成功" do
+      do_request
+      puts response_body
+      expect(status).to eq(201)
+    end
+
   end
 
 end

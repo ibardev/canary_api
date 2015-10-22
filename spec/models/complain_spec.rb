@@ -19,5 +19,6 @@
 require 'rails_helper'
 
 RSpec.describe Complain, type: :model do
-
+  it { should belong_to(:source_compainer) } 
+  it { should belong_to(:dest_compainer) } 
 end

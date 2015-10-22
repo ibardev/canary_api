@@ -27,6 +27,7 @@ Rails.application.routes.draw do
       post 'follow'
       post 'collect'
       post 'uncollect'
+      resources :complains, only: [:create]
     end
     collection do
       get 'collected'
@@ -35,6 +36,8 @@ Rails.application.routes.draw do
       get 'foreign'
     end
   end
+
+  resources :complains, only: [:show]
 
   ######################################################
 

@@ -17,4 +17,8 @@
 #
 
 class Complain < ActiveRecord::Base
+  enum reason: [:fake, :low, :porn, :rubbish]
+
+  belongs_to :source_compainer, class_name: "UserInfo", foreign_key: "source_id"
+  belongs_to :dest_compainer, class_name: "UserInfo", foreign_key: "dest_id"
 end
