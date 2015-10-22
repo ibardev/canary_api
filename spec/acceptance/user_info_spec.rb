@@ -26,6 +26,7 @@ resource "用户相关接口" do
   put "user_info" do
     user_attrs = FactoryGirl.attributes_for(:user)
     user_info_attrs = FactoryGirl.attributes_for(:user_info)
+    image_attrs = FactoryGirl.attributes_for(:image, photo_type: "cover")
 
     header "X-User-Token", user_attrs[:authentication_token]
     header "X-User-Phone", user_attrs[:phone]
@@ -45,6 +46,7 @@ resource "用户相关接口" do
     parameter :flight, "航班号", required: false, scope: :user_info
     parameter :train, "高铁车次", required: false, scope: :user_info
     parameter :hotel_type, "酒店类型【经济型连锁: economy, 三星级舒适: comfortable, 四星级高档: commercial, 五星级豪华: luxury】", required: false, scope: :user_info
+    parameter :cover_image_attributes, "封面背景", required: false, scope: :user_info
 
     let(:nickname) { "测试名称" }
     let(:birth) {"2008-5-28"}
@@ -56,11 +58,12 @@ resource "用户相关接口" do
     let(:contact_type) {"wechat"}
     let(:contact) {"1123123"}
     let(:slogan) {"用户签名"}
-    let(:avatar) { user_info_attrs[:avatar] }
+    # let(:avatar) { user_info_attrs[:avatar] }
     let(:carreer) { "student" }
     let(:flight) { "航班号" }
     let(:train) { "高铁车次" }
     let(:hotel_type) { "luxury" }
+    let(:cover_image_attributes) { image_attrs }
     # let(:raw_post) { params.to_json }
 
     before do
@@ -68,6 +71,7 @@ resource "用户相关接口" do
     end
 
     example "用户修改自己的信息成功" do
+      # puts params
       do_request
       # puts response_body
       expect(status).to eq(200)

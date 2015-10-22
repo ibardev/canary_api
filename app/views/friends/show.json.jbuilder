@@ -4,6 +4,7 @@ json.extract! @friend, :id, :sex, :nickname, :birth, :age, :constellation, :dest
 json.avatar @friend.avatar.present? ? @friend.avatar.url(:medium) : ""
 json.collected current_user.collected?(@friend)
 json.local current_user.same_city? @friend
+json.cover_image photo_url(@friend.cover_image, :product)
 
 json.followed current_user.followed?(@friend)
 if current_user.followed? @friend

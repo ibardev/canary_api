@@ -4,4 +4,6 @@ json.extract! @user_info, :id, :sex, :nickname, :birth, :age, :constellation, :d
 json.avatar @user_info.avatar.present? ? @user_info.avatar.url(:medium) : ""
 json.collected current_user.collected?(@user_info)
 
+json.cover_image photo_url(@user_info.cover_image, :product)
+
 

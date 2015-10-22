@@ -61,7 +61,8 @@ class UserInfosController < ApplicationController
       params.require(:user_info).permit(
         :sex, :nickname, :birth, :dest_province, :dest_city,
         :province, :city, :contact_type, :contact, :slogan,
-        :avatar, :carreer, :flight, :train, :hotel_type
+        :avatar, :carreer, :flight, :train, :hotel_type,
+        cover_image_attributes: [:id, :photo, :_destroy]
         )
     end
 

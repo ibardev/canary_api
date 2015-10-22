@@ -8,5 +8,5 @@ end
 
 json.images @invite_discover.images do |image|
   json.small photo_url(image, :small)
-  json.big photo_url(image, :big)
+  json.big photo_url(image, :product)
 end

@@ -48,6 +48,7 @@ FactoryGirl.define do
     flight "航班"
     train "列车次"
     hotel_type "luxury"
+    association :cover_image, factory: :image
   end
 
 end
