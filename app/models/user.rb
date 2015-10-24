@@ -87,11 +87,11 @@ class User < ActiveRecord::Base
     return if sms_token == "989898"
 
     if sms_token_obj.blank?
-      self.errors.add(:sms_token, "未获取，请先获取")
+      self.errors.add(:sms_token, "验证码未获取，请先获取")
     elsif sms_token_obj.try(:updated_at) < Time.zone.now - 30.minute
-      self.errors.add(:sms_token, "已失效，请重新获取")
+      self.errors.add(:sms_token, "验证码已失效，请重新获取")
     elsif sms_token_obj.try(:token) != sms_token 
-      self.errors.add(:sms_token, "不正确，请重试")
+      self.errors.add(:sms_token, "验证码不正确，请重试")
     end
   end
 
@@ -106,7 +106,7 @@ class User < ActiveRecord::Base
       user.save
     else
       user = User.new
-      user.errors.add(:phone, "对应的用户不存在")
+      user.errors.add(:phone, "手机号码对应的用户不存在")
     end
     user
   end
