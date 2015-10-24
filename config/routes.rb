@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
 
   get 'home/index'
-  
+
   root 'home#index'
+
+  get "home/:id" => 'home#index'
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
