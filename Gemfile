@@ -56,6 +56,9 @@ gem 'will_paginate', '~> 3.0.6'
 # The administration framework for Ruby on Rails applications. 
 gem 'activeadmin', '~> 1.0.0.pre2'
 
+# Official Sass port of Bootstrap 2 and 3.
+gem 'bootstrap-sass', '~> 3.3.5'
+
 ##########################################################################################
 
 # Use ActiveModel has_secure_password
