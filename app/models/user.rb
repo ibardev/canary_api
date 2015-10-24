@@ -40,6 +40,8 @@ class User < ActiveRecord::Base
   :recoverable, :rememberable, :trackable, :validatable,
   authentication_keys: [:phone]
 
+  delegate :sex, :constellation, :age, :birth, :province, :city, :dest_province, :dest_city, :contact_type, :contact, :carreer, :hotel_type, to: :user_info
+
   validates_uniqueness_of :phone
   validates_presence_of :phone
   validates :phone, length: { is: 11 }
@@ -47,6 +49,10 @@ class User < ActiveRecord::Base
   validate :sms_token_validate
 
   after_create :add_user_info
+
+  def name
+    phone
+  end
 
   def collect! friend
     self.likes friend, vote_scope: "collect"
@@ -75,6 +81,10 @@ class User < ActiveRecord::Base
 
   def followed? friend
     self.voted_up_on? friend, vote_scope: "follow"
+  end
+
+  def complain_count
+    Complain.where(source_compainer: user_info).count
   end
 
   def same_city? friend

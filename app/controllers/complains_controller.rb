@@ -23,7 +23,9 @@ class ComplainsController < ApplicationController
   end
 
   def create
+    # 被投诉人
     @source_compainer = UserInfo.find_by(params[:friend_id])
+    # 投诉人
     @dest_compainer = current_user_info
 
     @complain = Complain.new(complain_params)
