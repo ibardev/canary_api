@@ -60,6 +60,10 @@ gem 'activeadmin', '~> 1.0.0.pre2'
 # Official Sass port of Bootstrap 2 and 3.
 gem 'bootstrap-sass', '~> 3.3.5'
 
+# i18n
+gem 'rails-i18n', '~> 4.0.0'
+gem 'devise-i18n'
+
 ##########################################################################################
 
 # Use ActiveModel has_secure_password
