@@ -87,8 +87,9 @@ class User < ActiveRecord::Base
     Complain.where(source_compainer: user_info).count
   end
 
-  def same_city? friend
-    self.try(:user_info).try(:dest_city) == friend.try(:city)
+  def same_city? friend, local=true
+    city = local ? self.try(:user_info).try(:city) : self.try(:user_info).try(:dest_city)
+    city == friend.try(:city)
   end
 
   def sms_token_validate

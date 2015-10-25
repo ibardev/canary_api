@@ -17,6 +17,7 @@ class FriendsController < ApplicationController
   def local
     page = params[:page] || 1
     per_page = params[:per_page] || 10
+    @local = true
     @friends = UserInfo.opposite_sex(current_user_info[:sex]).match(current_user_info.city).paginate(page: page, per_page: per_page)
     respond_with(@friends) do |format|
       format.json { render :index }
@@ -26,6 +27,7 @@ class FriendsController < ApplicationController
   def foreign
     page = params[:page] || 1
     per_page = params[:per_page] || 10
+    @local = false
     @friends = UserInfo.opposite_sex(current_user_info[:sex]).match(current_user_info.dest_city).paginate(page: page, per_page: per_page)
     respond_with(@friends) do |format|
       format.json { render :index }
