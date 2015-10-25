@@ -87,6 +87,13 @@ resource "用户注册登录" do
       puts response_body
       expect(status).to eq(201)
     end
+
+    let(:password) { "00000000" }
+    example "用户登录失败" do
+      do_request
+      puts response_body
+      expect(status).to eq(401)
+    end
   end
 
   post "sms_tokens/register" do
