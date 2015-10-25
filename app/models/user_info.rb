@@ -52,7 +52,8 @@ class UserInfo < ActiveRecord::Base
   scope :same_sex, ->(sex) { where(sex: sex) }
   scope :opposite_sex, ->(sex) { where.not(sex: sex) }
   scope :local, ->(city) { where(city: city) }
-  scope :foreign, ->(city) { where.not(city: city) }
+  scope :foreign, ->(city) { where(dest_city: city) }
+  scope :match, ->(city) { where(city: city) or where(dest_city: city)}
   
   delegate :phone, to: :user
 

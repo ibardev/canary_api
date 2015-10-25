@@ -9,14 +9,15 @@ class FriendsController < ApplicationController
   def index
     page = params[:page] || 1
     per_page = params[:per_page] || 10
-    @friends = UserInfo.opposite_sex(current_user_info.sex).paginate(page: page, per_page: per_page)
+    city = current_user_info.dest_city.present? ? current_user_info.dest_city : current_user_info.city
+    @friends = UserInfo.opposite_sex(current_user_info.sex).match(city).paginate(page: page, per_page: per_page)
     respond_with(@friends)
   end
 
   def local
     page = params[:page] || 1
     per_page = params[:per_page] || 10
-    @friends = UserInfo.opposite_sex(current_user_info.sex).local(current_user_info.city).paginate(page: page, per_page: per_page)
+    @friends = UserInfo.opposite_sex(current_user_info.sex).local(current_user_info.dest_city).paginate(page: page, per_page: per_page)
     respond_with(@friends) do |format|
       format.json { render :index }
     end
@@ -25,7 +26,7 @@ class FriendsController < ApplicationController
   def foreign
     page = params[:page] || 1
     per_page = params[:per_page] || 10
-    @friends = UserInfo.opposite_sex(current_user_info.sex).foreign(current_user_info.city).paginate(page: page, per_page: per_page)
+    @friends = UserInfo.opposite_sex(current_user_info.sex).foreign(current_user_info.dest_city).paginate(page: page, per_page: per_page)
     respond_with(@friends) do |format|
       format.json { render :index }
     end

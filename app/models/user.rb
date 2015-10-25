@@ -88,7 +88,7 @@ class User < ActiveRecord::Base
   end
 
   def same_city? friend
-    self.try(:user_info).try(:city) == friend.try(:city)
+    self.try(:user_info).try(:dest_city) == friend.try(:city)
   end
 
   def sms_token_validate
