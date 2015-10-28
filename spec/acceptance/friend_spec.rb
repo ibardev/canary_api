@@ -28,8 +28,6 @@ resource "朋友信息相关接口" do
   end
 
   get "friends/:id" do
-    parameter :page, "页码", required: false
-    parameter :per_page, "每页个数", required: false
 
     user_attrs = FactoryGirl.attributes_for(:user)
     user_info_attrs = FactoryGirl.attributes_for(:user_info)

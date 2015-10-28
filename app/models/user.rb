@@ -106,6 +106,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def today_follow_count
+    self.find_liked_items(vote_scope: "follow").today
+  end
+
   def self.reset_user_password params
     phone = params[:phone]
     password = params[:password]
