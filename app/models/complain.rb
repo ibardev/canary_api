@@ -21,4 +21,5 @@ class Complain < ActiveRecord::Base
 
   belongs_to :source_compainer, class_name: "UserInfo", foreign_key: "source_id"
   belongs_to :dest_compainer, class_name: "UserInfo", foreign_key: "dest_id"
+  validates_uniqueness_of :source_id, scope: :dest_id, message: "该用户您已经投诉过，请不要重复投诉，谢谢"
 end
