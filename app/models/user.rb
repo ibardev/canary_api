@@ -63,7 +63,7 @@ class User < ActiveRecord::Base
   end
 
   def collections
-    self.get_likes vote_scope: "collect"
+    self.get_likes(vote_scope: "collect").order('id DESC')
   end
 
   def collected? friend
@@ -76,7 +76,7 @@ class User < ActiveRecord::Base
   end
 
   def followers
-    self.get_likes vote_scope: "follow"
+    self.get_likes(vote_scope: "follow").order('id DESC')
   end
 
   def can_followed?
