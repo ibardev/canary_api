@@ -80,7 +80,7 @@ class User < ActiveRecord::Base
   end
 
   def can_followed?
-    today_follow_count <= 3
+    today_follow_count < 3
   end
 
   def followed? friend
