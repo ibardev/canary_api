@@ -3,5 +3,5 @@ json.array!(@friends) do |friend|
   json.avatar friend.avatar.present? ? friend.avatar.url(:medium) : ""
   json.collected current_user.collected?(friend)
   json.local current_user.same_city? friend, @local
-  # json.followed current_user.followed?(friend)
+  json.followed current_user.followed?(friend)
 end
