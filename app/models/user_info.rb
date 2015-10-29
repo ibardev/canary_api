@@ -34,7 +34,7 @@
 class UserInfo < ActiveRecord::Base
   acts_as_votable
   
-  belongs_to :user, -> { order('current_sign_in_at DESC') }
+  belongs_to :user
 
   enum sex: [:male, :female]
   enum contact_type: [:wechat, :qq]
@@ -55,6 +55,7 @@ class UserInfo < ActiveRecord::Base
   scope :local, ->(city) { where(city: city) }
   scope :foreign, ->(city) { where(dest_city: city) }
   scope :match, ->(city) { where("city = ? or dest_city = ?", city, city) }
+  default_scope { joins(:user).order('current_sign_in_at DESC') }
 
   def age
     return "" if birth.blank?

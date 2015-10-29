@@ -37,7 +37,8 @@ resource "朋友信息相关接口" do
 
     before do
       create(:user)
-      @friend = create(:user_info)
+      @friend_user = create(:user, phone: "13850696686")
+      @friend = create(:user_info, user: @friend_user)
     end
     let(:id) { @friend.id }
 
@@ -58,7 +59,8 @@ resource "朋友信息相关接口" do
 
     before do
       create(:user)
-      @friend = create(:user_info)
+      @friend_user = create(:user, phone: "13850696686")
+      @friend = create(:user_info, user: @friend_user)
     end
     let(:id) { @friend.id }
 
@@ -80,7 +82,8 @@ resource "朋友信息相关接口" do
 
     before do
       create(:user)
-      @friend = create(:user_info)
+      @friend_user = create(:user, phone: "13850696686")
+      @friend = create(:user_info, user: @friend_user)
     end
     let(:id) { @friend.id }
 
@@ -102,7 +105,8 @@ resource "朋友信息相关接口" do
 
     before do
       create(:user)
-      @friend = create(:user_info)
+      @friend_user = create(:user, phone: "13850696686")
+      @friend = create(:user_info, user: @friend_user)
     end
     let(:id) { @friend.id }
 
