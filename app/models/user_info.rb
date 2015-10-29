@@ -34,7 +34,7 @@
 class UserInfo < ActiveRecord::Base
   acts_as_votable
   
-  belongs_to :user
+  belongs_to :user, -> { order('current_sign_in_at DESC') }
 
   enum sex: [:male, :female]
   enum contact_type: [:wechat, :qq]
@@ -46,16 +46,15 @@ class UserInfo < ActiveRecord::Base
 
   has_one :cover_image, -> { where photo_type: "cover" }, class_name: "Image", as: :imageable, dependent: :destroy
 
-  accepts_nested_attributes_for :cover_image, allow_destroy: true
+  delegate :phone, :sign_in_count, :current_sign_in_at, to: :user
 
+  accepts_nested_attributes_for :cover_image, allow_destroy: true
 
   scope :same_sex, ->(sex) { where(sex: sex) }
   scope :opposite_sex, ->(sex) { where.not(sex: sex) }
   scope :local, ->(city) { where(city: city) }
   scope :foreign, ->(city) { where(dest_city: city) }
   scope :match, ->(city) { where("city = ? or dest_city = ?", city, city) }
-  
-  delegate :phone, to: :user
 
   def age
     return "" if birth.blank?
