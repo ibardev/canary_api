@@ -63,7 +63,7 @@ class User < ActiveRecord::Base
   end
 
   def collections
-    self.get_likes(vote_scope: "collect").order('id DESC')
+    self.get_likes(vote_scope: "collect").order('id DESC').voters
   end
 
   def collected? friend
@@ -76,7 +76,7 @@ class User < ActiveRecord::Base
   end
 
   def followers
-    self.get_likes(vote_scope: "follow").order('id DESC')
+    self.get_likes(vote_scope: "follow").order('id DESC').voters
   end
 
   def can_followed?
@@ -111,7 +111,7 @@ class User < ActiveRecord::Base
   end
 
   def today_follow_count
-    self.followers.today.count
+    self.get_likes(vote_scope: "follow").today.count
   end
 
   def self.reset_user_password params
