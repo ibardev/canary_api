@@ -39,9 +39,13 @@ class FriendsController < ApplicationController
   end
 
   def follow
-    current_user.follow! @friend
-    respond_with(@friend) do |format|
-      format.json { render :show }
+    if current_user.can_followed?
+      current_user.follow! @friend
+      respond_with(@friend) do |format|
+        format.json { render :show }
+      end
+    else
+      render json: { errors: "24小时内查看的权限已经达到上限#{current_user.today_follow_count}次，请稍后再试，谢谢！" }, status: 422
     end
   end
 

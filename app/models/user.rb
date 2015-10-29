@@ -79,6 +79,10 @@ class User < ActiveRecord::Base
     self.get_likes vote_scope: "follow"
   end
 
+  def can_followed?
+    today_follow_count <= 3
+  end
+
   def followed? friend
     friend.voted_up_on? self, vote_scope: "follow"
   end
@@ -107,7 +111,7 @@ class User < ActiveRecord::Base
   end
 
   def today_follow_count
-    self.find_liked_items(vote_scope: "follow").today
+    self.followers.today.count
   end
 
   def self.reset_user_password params
