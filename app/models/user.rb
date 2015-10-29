@@ -29,7 +29,7 @@
 class User < ActiveRecord::Base
   ## Token Authenticatable
   acts_as_token_authenticatable
-  acts_as_voter
+  acts_as_votable
 
   attr_accessor :sms_token
   has_one :user_info, dependent: :destroy
@@ -55,32 +55,32 @@ class User < ActiveRecord::Base
   end
 
   def collect! friend
-    self.likes friend, vote_scope: "collect"
+    self.liked_by friend, vote_scope: "collect"
   end
 
   def uncollect! friend
-    self.dislikes friend, vote_scope: "collect"
+    self.unliked_by friend, vote_scope: "collect"
   end
 
   def collections
-    self.find_liked_items vote_scope: "collect"
+    self.get_likes vote_scope: "collect"
   end
 
   def collected? friend
-    self.voted_up_on? friend, vote_scope: "collect"
+    friend.voted_up_on? self, vote_scope: "collect"
   end
 
   def follow! friend
     self.uncollect! friend
-    self.likes friend, vote_scope: "follow"
+    self.liked_by friend, vote_scope: "follow"
   end
 
   def followers
-    self.find_liked_items vote_scope: "follow"
+    self.get_likes vote_scope: "follow"
   end
 
   def followed? friend
-    self.voted_up_on? friend, vote_scope: "follow"
+    friend.voted_up_on? self, vote_scope: "follow"
   end
 
   def complain_count

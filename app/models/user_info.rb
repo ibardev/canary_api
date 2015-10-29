@@ -32,8 +32,8 @@
 #
 
 class UserInfo < ActiveRecord::Base
-  acts_as_votable
   
+  acts_as_voter
   belongs_to :user
 
   enum sex: [:male, :female]
