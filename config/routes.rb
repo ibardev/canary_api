@@ -35,6 +35,7 @@ Rails.application.routes.draw do
       post 'follow'
       post 'collect'
       post 'uncollect'
+      post 'info'
       resources :complains, only: [:create]
     end
     collection do
