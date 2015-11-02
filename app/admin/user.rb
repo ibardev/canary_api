@@ -19,6 +19,7 @@ ActiveAdmin.register User do
     column :phone
     column :sex
     column :age
+    column :ban
     column :city do |user|
       "#{user.province}-#{user.city}"
     end
