@@ -17,6 +17,7 @@
 #  updated_at             :datetime
 #  authentication_token   :string
 #  phone                  :string
+#  ban                    :boolean
 #
 # Indexes
 #
@@ -50,8 +51,26 @@ class User < ActiveRecord::Base
 
   after_create :add_user_info
 
+  def active_for_authentication?
+    super && !self.banned?
+  end
+
   def name
     phone
+  end
+
+  def banned?
+    self.ban
+  end
+
+  def ban!
+    self.ban = true
+    self.save
+  end
+
+  def unban!
+    self.ban = false
+    self.save
   end
 
   def collect! friend

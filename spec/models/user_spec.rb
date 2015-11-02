@@ -17,6 +17,7 @@
 #  updated_at             :datetime
 #  authentication_token   :string
 #  phone                  :string
+#  ban                    :boolean
 #
 # Indexes
 #

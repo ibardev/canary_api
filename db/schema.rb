@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151022032637) do
+ActiveRecord::Schema.define(version: 20151102151636) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -154,6 +154,7 @@ ActiveRecord::Schema.define(version: 20151022032637) do
     t.datetime "updated_at"
     t.string   "authentication_token"
     t.string   "phone"
+    t.boolean  "ban"
   end
 
   add_index "users", ["authentication_token"], name: "index_users_on_authentication_token"
