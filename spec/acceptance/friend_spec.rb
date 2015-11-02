@@ -36,7 +36,7 @@ resource "朋友信息相关接口" do
     header "X-User-Phone", user_attrs[:phone]
 
     before do
-      create(:user)
+      @user = create(:user)
       @friend_user = create(:user, phone: "13850696686")
       @friend = create(:user_info, user: @friend_user)
     end
@@ -44,7 +44,7 @@ resource "朋友信息相关接口" do
 
     example "查看具体朋友的详细信息成功" do
       do_request
-      # puts response_body
+      puts response_body
       expect(status).to eq(200)  
     end
   end

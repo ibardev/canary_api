@@ -88,6 +88,14 @@ resource "用户注册登录" do
       expect(status).to eq(201)
     end
 
+    example "用户登录失败，用户被锁定" do
+      @user.ban!
+      do_request
+      puts response_body
+      expect(status).to eq(401)
+    end
+
+
   end
 
   post "sms_tokens/register" do
