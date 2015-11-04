@@ -47,7 +47,6 @@ FactoryGirl.define do
     carreer "manager"
     flight "航班"
     train "列车次"
-    ban false
     hotel_type "luxury"
     association :cover_image, factory: :image
   end

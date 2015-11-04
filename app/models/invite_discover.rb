@@ -21,7 +21,19 @@ class InviteDiscover < ActiveRecord::Base
   has_one :discover, as: :discoverable, dependent: :destroy
   after_create :add_discover
 
+  delegate :block, to: :discover
+
   accepts_nested_attributes_for :images
+
+  def block!
+    self.discover.block = true
+    self.discover.save
+  end
+
+  def unblock!
+    self.discover.block = false
+    self.discover.save
+  end
 
   def as_json options=nil
     {

@@ -6,7 +6,9 @@ class DiscoversController < ApplicationController
   respond_to :html, :json
 
   def index
-    @discovers = Discover.all
+    page = params[:page] || 1
+    per_page = params[:per_page] || 10
+    @discovers = Discover.unblock.paginate(page: page, per_page: per_page)
     respond_with(@discovers)
   end
 
