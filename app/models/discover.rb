@@ -21,5 +21,11 @@ class Discover < ActiveRecord::Base
   belongs_to :discoverable, polymorphic: true
   belongs_to :user
 
+  before_save :default_values
+
   scope :unblock, -> { where.not(block: true) }
+
+  def default_values
+    self.block ||= false
+  end
 end
