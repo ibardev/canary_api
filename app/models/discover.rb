@@ -24,6 +24,8 @@ class Discover < ActiveRecord::Base
   before_save :default_values
 
   scope :unblock, -> { where.not(block: true) }
+  
+  default_scope { order('updated_at DESC') }
 
   def default_values
     self.block ||= false
