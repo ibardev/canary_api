@@ -33,6 +33,6 @@ class UserDiscover < ActiveRecord::Base
     end
 
     def add_discover
-      self.create_discover user: user
+      self.create_discover user: user, block: false
     end
 end

@@ -21,8 +21,6 @@ class InviteDiscover < ActiveRecord::Base
   has_one :discover, as: :discoverable, dependent: :destroy
   after_create :add_discover
 
-  delegate :block, to: :discover
-
   accepts_nested_attributes_for :images
 
   def block!
@@ -33,6 +31,10 @@ class InviteDiscover < ActiveRecord::Base
   def unblock!
     self.discover.block = false
     self.discover.save
+  end
+
+  def block
+    self.discover.try(:block)
   end
 
   def as_json options=nil
@@ -52,6 +54,6 @@ class InviteDiscover < ActiveRecord::Base
 
   private
     def add_discover
-      self.create_discover user: user
+      self.create_discover user: user, block: false
     end
 end
