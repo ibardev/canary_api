@@ -23,6 +23,6 @@ class Discover < ActiveRecord::Base
 
   scope :unblock, -> { where.not(block: true) }
   
-  default_scope { order('updated_at DESC') }
+  default_scope { order('created_at DESC') }
 
 end
