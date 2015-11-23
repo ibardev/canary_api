@@ -47,7 +47,7 @@ class User < ActiveRecord::Base
   validates_presence_of :phone
   validates :phone, length: { is: 11 }
 
-  validate :sms_token_validate
+  validate :sms_token_validate, on: :create
 
   after_create :add_user_info
 
