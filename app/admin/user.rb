@@ -41,5 +41,12 @@ ActiveAdmin.register User do
     actions
   end
 
+  form do |f|
+    inputs 'Details' do
+      input :ban
+    end
+    actions
+  end
+
 
 end
