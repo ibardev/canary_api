@@ -17,6 +17,9 @@ ActiveAdmin.register User do
     selectable_column
     id_column
     column :phone
+    column :avatar do |obj|
+      link_to(image_tag(obj.user_info.avatar.url(:mini)), obj.user_info.avatar.url) if obj.try(:user_info).try(:avatar)
+    end
     column :sex
     column :age
     column :ban
@@ -33,6 +36,7 @@ ActiveAdmin.register User do
     column :last_sign_in_at
     column :sign_in_count
     column :constellation
+    actions
   end
 
 
