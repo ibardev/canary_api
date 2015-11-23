@@ -13,6 +13,8 @@ ActiveAdmin.register User do
 #   permitted
 # end
 
+  permit_params :ban
+
   index do
     selectable_column
     id_column
