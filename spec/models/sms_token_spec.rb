@@ -16,5 +16,11 @@
 require 'rails_helper'
 
 RSpec.describe SmsToken, type: :model do
-  
+  it 'should return error if user is ban' do
+    user = create(:user)
+    user.ban!
+
+    sms_token = SmsToken.register user.phone
+    expect(sms_token.errors).not_to eq(nil)
+  end
 end

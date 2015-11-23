@@ -101,7 +101,12 @@ resource "用户注册登录" do
   post "sms_tokens/register" do
     parameter :phone, "发送手机号", required: true, scope: :sms_token
 
-    let(:phone) { "11111111111" }
+    before do
+      @user = create(:user)
+    end
+
+    user_attrs = FactoryGirl.attributes_for :user
+    let(:phone) { user_attrs[:phone] }
     let(:raw_post) { params.to_json }
 
     response_field :id, "验证码ID"
@@ -111,6 +116,13 @@ resource "用户注册登录" do
       do_request
       puts response_body
       expect(status).to eq(201)
+    end
+
+    example "用户已经被锁定（发送验证码失败）" do
+      @user.ban!
+      do_request
+      puts response_body
+      expect(status).to eq(422)
     end
   end
 
@@ -170,6 +182,7 @@ resource "用户注册登录" do
         expect(status).to eq(422)
       end
 
+      let(:sms_token) { "98978" }
       example "用户重置密码失败（短信验证码不正确）" do
         create(:user)
         do_request
