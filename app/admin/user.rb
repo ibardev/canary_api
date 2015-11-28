@@ -22,7 +22,7 @@ ActiveAdmin.register User do
   filter :user_info_city, as: :string, label: 'city'
   filter :user_info_dest_province, as: :string, label: 'dest province'
   filter :user_info_dest_city, as: :string, label: 'dest city'
-  filter :user_info_contact_type, label: 'contact type'
+  filter :user_info_contact_type, as: :select, collection: UserInfo.contact_types, label: 'contact type'
   filter :user_info_contact, as: :string, label: 'contact'
 
   index do
