@@ -2,7 +2,8 @@ class InviteDiscoversController < ApplicationController
 
   acts_as_token_authentication_handler_for User
 
-  before_action :set_invite_discover, only: [:show, :edit, :update, :destroy]
+  before_action :set_invite_discover, only: [:show]
+  before_action :set_self_invite_discover, only: [:edit, :update, :destroy]
 
   respond_to :html, :json
 
@@ -45,6 +46,13 @@ class InviteDiscoversController < ApplicationController
   private
     def set_invite_discover
       @invite_discover = InviteDiscover.find(params[:id])
+    end
+
+    def set_self_invite_discover
+      set_invite_discover
+      if @invite_discover.user.id != current_user.id
+        @invite_discover.errors.add(:user, "请使用发布该邀约的用户操作，谢谢！")
+      end
     end
 
     def invite_discover_params

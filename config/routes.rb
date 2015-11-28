@@ -52,7 +52,7 @@ Rails.application.routes.draw do
 
   ######################################################
   # Discover Routes
-  resources :invite_discovers, only: [:show, :create]
+  resources :invite_discovers, only: [:show, :create, :destroy]
   resources :discovers, only: [:index]
 
   ######################################################  
