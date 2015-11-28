@@ -4,6 +4,15 @@ zh-CN:
       user:
         phone: "手机号码"
         sms_token: "短信验证码"
+        ban: "封禁"
+      user_info:
+        sex: "性别"
+        province: "来源省份"
+        city: "来源城市"
+        dest_province: "目的地省份"
+        dest_city: "目的地城市"
+        contact_type: "联系类型"
+        contact: "联系方式"
   devise:
     failure:
       already_authenticated: "登录成功"

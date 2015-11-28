@@ -15,6 +15,16 @@ ActiveAdmin.register User do
 
   permit_params :ban
 
+  filter :phone
+  filter :ban
+  filter :user_info_sex, as: :select, collection: UserInfo.sexes.keys, label: 'sex'
+  filter :user_info_province, as: :string, label: 'province'
+  filter :user_info_city, as: :string, label: 'city'
+  filter :user_info_dest_province, as: :string, label: 'dest province'
+  filter :user_info_dest_city, as: :string, label: 'dest city'
+  filter :user_info_contact_type, label: 'contact type'
+  filter :user_info_contact, as: :string, label: 'contact'
+
   index do
     selectable_column
     id_column
