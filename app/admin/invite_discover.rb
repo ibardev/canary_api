@@ -24,6 +24,11 @@ ActiveAdmin.register InviteDiscover do
 
   index do
     selectable_column
+    column :images do |obj|
+      obj.images.each do |image|
+        link_to(image_tag(image.photo.url(:mini)), image.photo.url) if image.photo
+      end
+    end
     column :id
     column :user
     column :begin_date
