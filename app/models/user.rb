@@ -18,6 +18,7 @@
 #  authentication_token   :string
 #  phone                  :string
 #  ban                    :boolean
+#  banned_at              :datetime
 #
 # Indexes
 #
@@ -52,6 +53,18 @@ class User < ActiveRecord::Base
   after_create :add_user_info
 
   def active_for_authentication?
+    if self.complain_count >= 3 && self.complain_count < 6
+      # 如果锁定了3-5次，并且已经超过了15天，则需要解禁了
+      if self.ban == true && self.banned_at - Time.zone.now > 15.day
+        self.unban!
+      elsif self.ban == false && self.banned_at.empty?
+        self.ban!
+      end
+    elsif self.complain_count > 6
+      if self.ban == false
+        self.ban!
+      end
+    end
     super && !self.banned?
   end
 
@@ -65,6 +78,7 @@ class User < ActiveRecord::Base
 
   def ban!
     self.ban = true
+    self.banned_at = Time.zone.now
     self.save
   end
 

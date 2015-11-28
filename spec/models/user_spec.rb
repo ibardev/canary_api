@@ -18,6 +18,7 @@
 #  authentication_token   :string
 #  phone                  :string
 #  ban                    :boolean
+#  banned_at              :datetime
 #
 # Indexes
 #
