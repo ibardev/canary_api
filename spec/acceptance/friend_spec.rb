@@ -21,7 +21,7 @@ resource "朋友信息相关接口" do
 
     example "用户查询朋友相关列表信息成功" do
       do_request
-      # puts response_body
+      puts response_body
       expect(status).to eq(200)
     end
 
@@ -136,7 +136,7 @@ resource "朋友信息相关接口" do
 
     example "用户查询已联系的朋友列表信息成功" do
       do_request
-      # puts response_body
+      puts response_body
       expect(status).to eq(200)
     end
   end
