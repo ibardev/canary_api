@@ -64,6 +64,9 @@ gem 'bootstrap-sass', '~> 3.3.5'
 gem 'rails-i18n', '~> 4.0.0'
 gem 'devise-i18n'
 
+# Version Cake is an unobtrusive way to version APIs in your Rails app.
+gem 'versioncake'
+
 ##########################################################################################
 
 # Use ActiveModel has_secure_password
