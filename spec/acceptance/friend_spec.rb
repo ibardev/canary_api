@@ -144,6 +144,7 @@ resource "朋友信息相关接口" do
   get "friends/local" do
     parameter :page, "页码", required: false
     parameter :per_page, "每页个数", required: false
+    parameter :api_verison, "api版本", required: false
 
     user_attrs = FactoryGirl.attributes_for(:user)
     user_info_attrs = FactoryGirl.attributes_for(:user_info)
@@ -166,6 +167,7 @@ resource "朋友信息相关接口" do
   get "friends/foreign" do
     parameter :page, "页码", required: false
     parameter :per_page, "每页个数", required: false
+    parameter :api_verison, "api版本", required: false
 
     user_attrs = FactoryGirl.attributes_for(:user)
     user_info_attrs = FactoryGirl.attributes_for(:user_info)
