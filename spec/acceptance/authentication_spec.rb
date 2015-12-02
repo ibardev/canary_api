@@ -94,6 +94,17 @@ resource "用户注册登录" do
       puts response_body
       expect(status).to eq(401)
     end
+    describe '用户投诉' do
+      example "用户被投诉，用户登录返回被锁定" do
+        (10..12).each do |index| 
+          Complain.create(source_compainer: @user.user_info, dest_id: index)  
+        end
+        do_request
+        puts response_body
+        expect(status).to eq(401)
+      end  
+    end
+    
 
 
   end

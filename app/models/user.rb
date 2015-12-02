@@ -53,15 +53,16 @@ class User < ActiveRecord::Base
   after_create :add_user_info
 
   def active_for_authentication?
-    if self.complain_count >= 3 && self.complain_count < 6
+    complain = self.complain_count
+    if complain >= 3 && complain < 6
       # 如果锁定了3-5次，并且已经超过了15天，则需要解禁了
-      if self.ban == true && self.banned_at - Time.zone.now > 15.day
+      if self.banned? && self.banned_at - Time.zone.now > 15.day
         self.unban!
-      elsif self.ban == false && self.banned_at.empty?
+      elsif !self.banned? && self.banned_at.blank?
         self.ban!
       end
-    elsif self.complain_count > 6
-      if self.ban == false
+    elsif complain > 6
+      if !self.banned?
         self.ban!
       end
     end
