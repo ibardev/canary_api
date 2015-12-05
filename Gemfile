@@ -67,6 +67,9 @@ gem 'devise-i18n'
 # Version Cake is an unobtrusive way to version APIs in your Rails app.
 gem 'versioncake'
 
+# An ActiveRecord plugin for managing lists.
+gem 'acts_as_list'
+
 ##########################################################################################
 
 # Use ActiveModel has_secure_password
