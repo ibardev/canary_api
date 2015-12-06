@@ -46,7 +46,7 @@ class UserInfo < ActiveRecord::Base
 
   has_one :cover_image, -> { where photo_type: "cover" }, class_name: "Image", as: :imageable, dependent: :destroy
 
-  delegate :phone, :sign_in_count, :current_sign_in_at, to: :user
+  delegate :phone, :ban, :sign_in_count, :current_sign_in_at, to: :user
 
   accepts_nested_attributes_for :cover_image, allow_destroy: true
 
@@ -57,7 +57,7 @@ class UserInfo < ActiveRecord::Base
   scope :match, ->(city) { where("city = ? or dest_city = ?", city, city) }
   scope :current_sign_in_desc, -> { joins(:user).order('current_sign_in_at DESC') }
 
-  default_scope { joins(:user).where.not(users: { ban: true }) }
+  default_scope { joins(:user).where(users: { ban: [false, nil] }) }
 
   def age
     return "" if birth.blank?
