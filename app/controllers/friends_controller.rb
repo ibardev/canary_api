@@ -10,8 +10,8 @@ class FriendsController < ApplicationController
     page = params[:page] || 1
     per_page = params[:per_page] || 10
     city = current_user_info.city
-    @friends = UserInfo.opposite_sex(current_user_info[:sex]).match(city).current_sign_in_desc.paginate(page: page, per_page: per_page)
-    @local_count = UserInfo.opposite_sex(current_user_info[:sex]).local(city).count
+    @friends = UserInfo.available.opposite_sex(current_user_info[:sex]).match(city).current_sign_in_desc.paginate(page: page, per_page: per_page)
+    @local_count = UserInfo.available.opposite_sex(current_user_info[:sex]).local(city).count
     @foreign_count = @friends.count - @local_count
     respond_with(@friends)
   end
@@ -20,8 +20,8 @@ class FriendsController < ApplicationController
     page = params[:page] || 1
     per_page = params[:per_page] || 10
     @local = true
-    @friends = UserInfo.opposite_sex(current_user_info[:sex]).match(current_user_info.city).current_sign_in_desc.paginate(page: page, per_page: per_page)
-    @local_count = UserInfo.opposite_sex(current_user_info[:sex]).local(current_user_info.city).count
+    @friends = UserInfo.available.opposite_sex(current_user_info[:sex]).match(current_user_info.city).current_sign_in_desc.paginate(page: page, per_page: per_page)
+    @local_count = UserInfo.available.opposite_sex(current_user_info[:sex]).local(current_user_info.city).count
     @foreign_count = @friends.count - @local_count
     respond_with(@friends) do |format|
       format.json { render :index }
@@ -32,8 +32,8 @@ class FriendsController < ApplicationController
     page = params[:page] || 1
     per_page = params[:per_page] || 10
     @local = false
-    @friends = UserInfo.opposite_sex(current_user_info[:sex]).match(current_user_info.dest_city).current_sign_in_desc.paginate(page: page, per_page: per_page)
-    @local_count = UserInfo.opposite_sex(current_user_info[:sex]).local(current_user_info.dest_city).count
+    @friends = UserInfo.available.opposite_sex(current_user_info[:sex]).match(current_user_info.dest_city).current_sign_in_desc.paginate(page: page, per_page: per_page)
+    @local_count = UserInfo.available.opposite_sex(current_user_info[:sex]).local(current_user_info.dest_city).count
     @foreign_count = @friends.count - @local_count
     respond_with(@friends) do |format|
       format.json { render :index }

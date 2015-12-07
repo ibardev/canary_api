@@ -219,13 +219,14 @@ resource "朋友信息相关接口" do
     header "X-User-Token", user_attrs[:authentication_token]
     header "X-User-Phone", user_attrs[:phone]
 
-    let(:reason) { "fake" }
-    let(:comment) { "This is a comment!" }
-
     before do
       @source_compainer = create(:user)
       @dest_complainer = create(:user_info)
     end
+
+    let(:reason) { "fake" }
+    let(:comment) { "This is a comment!" }
+    let(:id) { 1 }
 
     example "投诉相关人员成功" do
       do_request

@@ -56,8 +56,7 @@ class UserInfo < ActiveRecord::Base
   scope :foreign, ->(city) { where(dest_city: city) }
   scope :match, ->(city) { where("city = ? or dest_city = ?", city, city) }
   scope :current_sign_in_desc, -> { joins(:user).order('current_sign_in_at DESC') }
-
-  default_scope { joins(:user).where(users: { ban: [false, nil] }) }
+  scope :available, -> { joins(:user).where(users: { ban: [false, nil] }) }
 
   def age
     return "" if birth.blank?

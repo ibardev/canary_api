@@ -22,7 +22,7 @@ class Discover < ActiveRecord::Base
   belongs_to :user
 
   scope :unblock, -> { where.not(block: true) }
-  
-  default_scope { joins(:user).where(users: { ban: [false, nil] }).order('created_at DESC') }
+  scope :available, -> { joins(:user).where(users: { ban: [false, nil] }) }
 
+  default_scope { order('created_at DESC') }
 end

@@ -8,7 +8,7 @@ class DiscoversController < ApplicationController
   def index
     page = params[:page] || 1
     per_page = params[:per_page] || 10
-    @discovers = Discover.unblock.paginate(page: page, per_page: per_page)
+    @discovers = Discover.unblock.available.paginate(page: page, per_page: per_page)
     respond_with(@discovers)
   end
 
