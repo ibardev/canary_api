@@ -70,6 +70,8 @@ gem 'versioncake'
 # An ActiveRecord plugin for managing lists.
 gem 'acts_as_list'
 
+# Drag and drop sort interface for ActiveAdmin tables
+gem 'activeadmin-sortable'
 ##########################################################################################
 
 # Use ActiveModel has_secure_password
