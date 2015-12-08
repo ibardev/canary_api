@@ -12,8 +12,9 @@
 
 FactoryGirl.define do
   factory :banner do
-    title "MyString"
-url "MyString"
+    title "Banner title"
+    url "http://www.baidu.com"
+    association :cover_image, factory: :image, photo_type: "cover"
   end
 
 end

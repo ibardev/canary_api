@@ -48,6 +48,8 @@ Rails.application.routes.draw do
 
   resources :complains, only: [:show]
 
+  resources :banners, only: [:index]
+
   ######################################################
 
   ######################################################

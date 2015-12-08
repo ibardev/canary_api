@@ -106,5 +106,17 @@ resource "发现相关接口" do
     end
   end
 
+  get "banners" do
+    before do
+      create_list(:banner, 3)
+    end
+
+    example "获取banner列表成功" do
+      do_request
+      puts response_body
+      expect(status).to eq(200)
+    end
+  end
+
 
 end
