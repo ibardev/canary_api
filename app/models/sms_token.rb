@@ -23,10 +23,18 @@ class SmsToken < ActiveRecord::Base
     if user.try(:ban)
       sms_token.errors.add(:sms_token, "该用户已被封禁")
     elsif phone.present?
-      company = "旅客"
+      if phone.to_s.start_with?("+")
+        sms_hash = { code: token }
+        tpl_id = 1147325
+      else
+        tpl_id = 2
+        company = "旅客"
+        sms_hash = {company: company, code: token}
+      end
+      
       ChinaSMS.use :yunpian, password: "e480d5b2daedcd3c0b0d83438ffa01b8"
-      tpl_id = phone.to_s.start_with?("+") ? 1147325 : 2
-      result = ChinaSMS.to phone, {company: company, code: token}, {tpl_id: tpl_id}
+      
+      result = ChinaSMS.to phone, sms_hash, {tpl_id: tpl_id}
       
       sms_token.token = token
       sms_token.save
