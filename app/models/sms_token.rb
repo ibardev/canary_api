@@ -25,7 +25,8 @@ class SmsToken < ActiveRecord::Base
     elsif phone.present?
       company = "旅客"
       ChinaSMS.use :yunpian, password: "e480d5b2daedcd3c0b0d83438ffa01b8"
-      result = ChinaSMS.to phone, {company: company, code: token}, {tpl_id: 2}
+      tpl_id = phone.to_s.start_with?("+") ? 1147325 : 2
+      result = ChinaSMS.to phone, {company: company, code: token}, {tpl_id: tpl_id}
       
       sms_token.token = token
       sms_token.save

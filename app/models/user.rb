@@ -46,7 +46,7 @@ class User < ActiveRecord::Base
 
   validates_uniqueness_of :phone
   validates_presence_of :phone
-  validates :phone, length: { is: 11 }
+  # validates :phone, length: { is: 11 }
 
   validate :sms_token_validate, on: :create
 
