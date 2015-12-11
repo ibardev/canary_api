@@ -16,7 +16,7 @@ ActiveAdmin.register User do
   permit_params :ban, :phone, :sms_token, :password, :password_confirmation, 
               user_info_attributes: 
               [:nickname, :sex, :province, :city, :dest_province, :dest_city,
-                :slogan, :birth, :contact_type, :contact  ]
+                :slogan, :birth, :contact_type, :contact, :avatar  ]
 
   filter :phone
   filter :ban
@@ -81,19 +81,44 @@ ActiveAdmin.register User do
     end
     
     f.inputs "User Info", for: [:user_info, f.object.user_info || f.object.build_user_info] do |cf|
+      user_info = f.object.user_info
       cf.input :nickname
+      cf.input :avatar, as: :file, hint: (user_info.avatar.blank?) \
+        ? cf.template.content_tag(:span, "no cover page yet")
+        : cf.template.link_to(image_tag(user_info.avatar.url(:medium)), user_info.avatar.url, target: "_blank")
+
       cf.input :sex, as: :select, collection: UserInfo.sexes.keys
       cf.input :province
       cf.input :city
       cf.input :dest_province
       cf.input :dest_city
       cf.input :birth
-      cf.input :slogan
       cf.input :contact_type, as: :select, collection: UserInfo.contact_types.keys
       cf.input :contact
+      cf.input :slogan
     end
     actions
   end
 
+  show do |obj|
+    attributes_table do
+      row :phone
+      row :avatar do
+        if obj.user_info.avatar
+          link_to(image_tag(obj.user_info.avatar.url(:medium)), obj.user_info.avatar.url, target: "_blank")
+        end
+      end
+      row :sex
+      row :ban
+      row :nickname
+      row :province
+      row :city
+      row :dest_province
+      row :dest_city
+      row :age
+      row :sex
+      row :constellation
+    end
+  end
 
 end

@@ -43,7 +43,7 @@ class User < ActiveRecord::Base
   :recoverable, :rememberable, :trackable, :validatable,
   authentication_keys: [:phone]
 
-  delegate :sex, :constellation, :age, :birth, :province, :city, :dest_province, :dest_city, :contact_type, :contact, :carreer, :hotel_type, to: :user_info
+  delegate :nickname, :sex, :constellation, :age, :birth, :province, :city, :dest_province, :dest_city, :contact_type, :contact, :carreer, :hotel_type, to: :user_info
 
   validates_uniqueness_of :phone
   validates_presence_of :phone
