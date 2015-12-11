@@ -32,7 +32,7 @@ FactoryGirl.define do
   factory :user do
     phone "13813813811"
     password "abcd.1234"
-    sms_token "989898"
+    sms_token "1981"
     authentication_token "qwertyuiop"
   end
 

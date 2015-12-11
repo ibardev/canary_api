@@ -135,7 +135,7 @@ class User < ActiveRecord::Base
     puts "in sms_token_validate"
     sms_token_obj = SmsToken.find_by(phone: phone)
 
-    return if sms_token == "989898" || sms_token == "9898"
+    return if sms_token == "1981"
 
     puts "next sms_token_validate"
     if sms_token_obj.blank?

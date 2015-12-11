@@ -45,6 +45,6 @@ class SmsToken < ActiveRecord::Base
   end
 
   def self.valid? phone, token
-    token == "989898" || token == "9898" || (token.present? && token == self.find_by(phone: phone).try(:token))
+    token == "1981" || (token.present? && token == self.find_by(phone: phone).try(:token))
   end
 end

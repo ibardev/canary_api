@@ -172,7 +172,7 @@ resource "用户注册登录" do
       user_attrs = FactoryGirl.attributes_for :user
       let(:phone) { user_attrs[:phone] }
       let(:password) { user_attrs[:password] }
-      let(:sms_token) { "989898" }
+      let(:sms_token) { "1981" }
 
       example "用户重置密码成功" do
         do_request
