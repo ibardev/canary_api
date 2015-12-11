@@ -35,6 +35,7 @@ class User < ActiveRecord::Base
 
   attr_accessor :sms_token
   has_one :user_info, dependent: :destroy
+  accepts_nested_attributes_for :user_info, allow_destroy: true
   
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -131,10 +132,12 @@ class User < ActiveRecord::Base
   end
 
   def sms_token_validate
+    puts "in sms_token_validate"
     sms_token_obj = SmsToken.find_by(phone: phone)
 
     return if sms_token == "989898" || sms_token == "9898"
 
+    puts "next sms_token_validate"
     if sms_token_obj.blank?
       self.errors.add(:sms_token, "验证码未获取，请先获取")
     elsif sms_token_obj.try(:updated_at) < Time.zone.now - 30.minute
@@ -176,6 +179,6 @@ class User < ActiveRecord::Base
 
   private
     def add_user_info
-      self.create_user_info
+      self.create_user_info unless self.user_info.present?
     end
 end
