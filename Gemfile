@@ -72,6 +72,12 @@ gem 'acts_as_list'
 
 # Drag and drop sort interface for ActiveAdmin tables
 gem 'activeadmin-sortable'
+
+# Integrate Select2 javascript library with Rails asset pipeline
+gem 'select2-rails'
+# ActiveAdmin Select2 integration
+gem 'activeadmin-select2'
+
 ##########################################################################################
 
 # Use ActiveModel has_secure_password

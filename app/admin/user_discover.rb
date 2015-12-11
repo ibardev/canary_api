@@ -33,7 +33,7 @@ ActiveAdmin.register UserDiscover do
 
   form do |f|
     inputs 'Details' do
-      input :user
+      f.input :user, as: :select2
     end
     actions
   end
