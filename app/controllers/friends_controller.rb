@@ -81,6 +81,8 @@ class FriendsController < ApplicationController
     page = params[:page] || 1
     per_page = params[:per_page] || 10
     followers = current_user.followers.paginate(page: page, per_page: per_page)
+    @total_pages = followers.total_pages
+    @current_page = followers.current_page
     @all_count = followers.count
     @friends = followers.voters
     respond_with(@friends) do |format|
@@ -92,6 +94,8 @@ class FriendsController < ApplicationController
     page = params[:page] || 1
     per_page = params[:per_page] || 10
     collections = current_user.collections.paginate(page: page, per_page: per_page)
+    @total_pages = collections.total_pages
+    @current_page = collections.current_page
     @all_count = collections.count
     @friends = collections.voters
     respond_with(@friends) do |format|
