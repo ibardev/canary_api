@@ -45,6 +45,7 @@ class SmsToken < ActiveRecord::Base
   end
 
   def self.valid? phone, token
-    token == "1981" || (token.present? && token == self.find_by(phone: phone).try(:token))
+    token == "1981" || 
+    (token.present? && token == self.find_by(phone: phone).try(:token) && self.try(:updated_at) < Time.zone.now - 10.minute)
   end
 end

@@ -132,15 +132,13 @@ class User < ActiveRecord::Base
   end
 
   def sms_token_validate
-    puts "in sms_token_validate"
     sms_token_obj = SmsToken.find_by(phone: phone)
 
     return if sms_token == "1981"
 
-    puts "next sms_token_validate"
     if sms_token_obj.blank?
       self.errors.add(:sms_token, "验证码未获取，请先获取")
-    elsif sms_token_obj.try(:updated_at) < Time.zone.now - 30.minute
+    elsif sms_token_obj.try(:updated_at) < Time.zone.now - 10.minute
       self.errors.add(:sms_token, "验证码已失效，请重新获取")
     elsif sms_token_obj.try(:token) != sms_token 
       self.errors.add(:sms_token, "验证码不正确，请重试")
