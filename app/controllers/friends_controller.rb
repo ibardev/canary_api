@@ -21,8 +21,9 @@ class FriendsController < ApplicationController
     per_page = params[:per_page] || 10
     @local = true
     @friends = UserInfo.available.opposite_sex(current_user_info[:sex]).match(current_user_info.city).current_sign_in_desc.paginate(page: page, per_page: per_page)
+    @all_count = @friends.count
     @local_count = UserInfo.available.opposite_sex(current_user_info[:sex]).local(current_user_info.city).count
-    @foreign_count = @friends.count - @local_count
+    @foreign_count = @all_count - @local_count
     respond_with(@friends) do |format|
       format.json { render :index }
     end
@@ -33,8 +34,9 @@ class FriendsController < ApplicationController
     per_page = params[:per_page] || 10
     @local = false
     @friends = UserInfo.available.opposite_sex(current_user_info[:sex]).match(current_user_info.dest_city).current_sign_in_desc.paginate(page: page, per_page: per_page)
+    @all_count = @friends.count
     @local_count = UserInfo.available.opposite_sex(current_user_info[:sex]).local(current_user_info.dest_city).count
-    @foreign_count = @friends.count - @local_count
+    @foreign_count = @all_count - @local_count
     respond_with(@friends) do |format|
       format.json { render :index }
     end
@@ -78,7 +80,9 @@ class FriendsController < ApplicationController
   def followed
     page = params[:page] || 1
     per_page = params[:per_page] || 10
-    @friends = current_user.followers.paginate(page: page, per_page: per_page)
+    followers = current_user.followers.paginate(page: page, per_page: per_page)
+    @all_count = followers.count
+    @friends = followers.voters
     respond_with(@friends) do |format|
       format.json { render :index }
     end
@@ -87,7 +91,9 @@ class FriendsController < ApplicationController
   def collected
     page = params[:page] || 1
     per_page = params[:per_page] || 10
-    @friends = current_user.collections.paginate(page: page, per_page: per_page)
+    collections = current_user.collections.paginate(page: page, per_page: per_page)
+    @all_count = collections.count
+    @friends = collections.voters
     respond_with(@friends) do |format|
       format.json { render :index }
     end

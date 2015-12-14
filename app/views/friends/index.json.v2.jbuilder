@@ -1,6 +1,6 @@
 json.total_pages @friends.total_pages
 json.current_page @friends.current_page
-json.all_count @friends.count
+json.all_count @all_count
 json.local_count @local_count if @local_count.present?
 json.foreign_count @foreign_count if @foreign_count.present?
 
