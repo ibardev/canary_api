@@ -21,6 +21,7 @@ ActiveAdmin.register User do
   filter :phone
   filter :ban
   filter :user_info_sex, as: :select, collection: UserInfo.sexes, label: 'sex'
+  filter :user_info_nickname, as: :string, label: 'nickname'
   filter :user_info_province, as: :string, label: 'province'
   filter :user_info_city, as: :string, label: 'city'
   filter :user_info_dest_province, as: :string, label: 'dest province'
