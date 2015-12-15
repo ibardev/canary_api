@@ -32,6 +32,9 @@ ActiveAdmin.register InviteDiscover do
     end
     column :id
     column :user
+    column :nickname do |obj|
+      obj.try(:user).try(:nickname)
+    end
     column :begin_date
     column :end_date
     column :content

@@ -42,6 +42,7 @@ ActiveAdmin.register User do
     selectable_column
     id_column
     column :phone
+    column :nickname
     column :avatar do |obj|
       link_to(image_tag(obj.user_info.avatar.url(:mini)), obj.user_info.avatar.url) if obj.try(:user_info).try(:avatar)
     end
