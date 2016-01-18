@@ -2,7 +2,7 @@ class UserInfosController < ApplicationController
 
   acts_as_token_authentication_handler_for User, except: [:check, :reset] 
 
-  before_action :set_user_info, only: [:show, :edit, :update, :destroy]
+  before_action :set_user_info, only: [:show, :edit, :update, :count, :destroy]
 
   respond_to :html, :json
 

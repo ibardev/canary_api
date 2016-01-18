@@ -36,6 +36,7 @@ Rails.application.routes.draw do
       post 'collect'
       post 'uncollect'
       post 'info'
+      post 'like'
       resources :complains, only: [:create]
     end
     collection do
@@ -43,6 +44,8 @@ Rails.application.routes.draw do
       get 'followed'
       get 'local'
       get 'foreign'
+      get 'count'
+      get 'liked'
     end
   end
 

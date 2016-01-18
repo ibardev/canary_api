@@ -114,6 +114,16 @@ class User < ActiveRecord::Base
     self.get_likes(vote_scope: "follow").order('id DESC')
   end
 
+  def like! friend
+    if friend.present?
+      friend.liked_by self, vote_scope: "like"
+    end
+  end
+
+  def likes
+    self.get_likes(vote_scope: "like").order('id DESC')
+  end
+
   def can_followed?
     today_follow_count < 3
   end

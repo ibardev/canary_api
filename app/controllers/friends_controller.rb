@@ -1,8 +1,8 @@
 class FriendsController < ApplicationController
 
-  acts_as_token_authentication_handler_for User, except: [:check, :reset] 
+  acts_as_token_authentication_handler_for User
 
-  before_action :set_friend, only: [:show, :follow, :collect, :uncollect, :info]
+  before_action :set_friend, only: [:show, :follow, :collect, :uncollect, :info, :count]
 
   respond_to :html, :json
 
@@ -98,6 +98,26 @@ class FriendsController < ApplicationController
     @current_page = collections.current_page
     @all_count = collections.count
     @friends = collections.voters
+    respond_with(@friends) do |format|
+      format.json { render :index }
+    end
+  end
+
+  def like
+    current_user.like! @friend
+    respond_with(@friend) do |format|
+      format.json { render :show }
+    end
+  end
+
+  def liked
+    page = params[:page] || 1
+    per_page = params[:per_page] || 10
+    likes = current_user.likes.paginate(page: page, per_page: per_page)
+    @total_pages = likes.total_pages
+    @current_page = likes.current_page
+    @all_count = likes.count
+    @friends = likes.voters
     respond_with(@friends) do |format|
       format.json { render :index }
     end
