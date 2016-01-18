@@ -115,8 +115,8 @@ class User < ActiveRecord::Base
   end
 
   def like! friend
-    if friend.present?
-      friend.liked_by self, vote_scope: "like"
+    if friend.try(:user).present?
+      friend.user.liked_by self.user_info, vote_scope: "like"
     end
   end
 
