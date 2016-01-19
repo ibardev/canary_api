@@ -108,6 +108,7 @@ class User < ActiveRecord::Base
   def follow! friend
     self.uncollect! friend
     self.liked_by friend, vote_scope: "follow"
+    friend.user.liked_by self.user_info, vote_scope: "following"
   end
 
   def followers
@@ -122,6 +123,10 @@ class User < ActiveRecord::Base
 
   def likes
     self.get_likes(vote_scope: "like").order('id DESC')
+  end
+
+  def followings
+    self.get_likes(vote_scope: "following").order('id DESC')
   end
 
   def can_followed?

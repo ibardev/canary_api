@@ -90,6 +90,19 @@ class FriendsController < ApplicationController
     end
   end
 
+  def followings
+    page = params[:page] || 1
+    per_page = params[:per_page] || 10
+    followings = current_user.followings.paginate(page: page, per_page: per_page)
+    @total_pages = followings.total_pages
+    @current_page = followings.current_page
+    @all_count = followings.count
+    @friends = followings.voters
+    respond_with(@friends) do |format|
+      format.json { render :index }
+    end
+  end
+
   def collected
     page = params[:page] || 1
     per_page = params[:per_page] || 10

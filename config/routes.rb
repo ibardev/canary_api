@@ -42,6 +42,7 @@ Rails.application.routes.draw do
     collection do
       get 'collected'
       get 'followed'
+      get 'followings'
       get 'local'
       get 'foreign'
       get 'count'
