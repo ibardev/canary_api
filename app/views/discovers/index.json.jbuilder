@@ -8,7 +8,7 @@ json.array!(@discovers) do |discover|
 
     json.collected current_user.collected?(user_info)
     json.local current_user.same_city? user_info
-    json.respond_count discover.respond_count
+    json.respond_count discover.respond_count if discover.respond_to?(:respond_count)
   end
 
   json.extract! discover, :id, :discoverable_type, :discoverable_id, :updated_at
