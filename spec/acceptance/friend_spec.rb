@@ -157,7 +157,7 @@ resource "朋友信息相关接口" do
     let(:id) { @friend.id }
 
 
-    example "申请收藏朋友成功" do
+    example "用户赞朋友成功" do
       do_request
       puts response_body
       expect(status).to eq(200)  

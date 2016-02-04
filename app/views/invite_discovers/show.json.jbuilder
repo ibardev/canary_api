@@ -4,6 +4,7 @@ if @invite_discover.user
   user_info = @invite_discover.user.user_info
   json.extract! user_info, :nickname, :carreer
   json.avatar user_info.avatar.present? ? user_info.avatar.url(:medium) : ""
+  json.respond_count @invite_discover.respond_count
 end
 
 json.images @invite_discover.images do |image|

@@ -125,6 +125,14 @@ class User < ActiveRecord::Base
     self.get_likes(vote_scope: "like").order('id DESC')
   end
 
+  def respond! responder
+    self.liked_by responder, vote_scope: "respond"
+  end
+
+  def responders
+    self.get_likes(vote_scope: "respond").order('id DESC')
+  end
+
   def followings
     self.get_likes(vote_scope: "following").order('id DESC')
   end

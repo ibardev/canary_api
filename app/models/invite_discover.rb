@@ -16,12 +16,24 @@
 #
 
 class InviteDiscover < ActiveRecord::Base
+  acts_as_votable
+
   belongs_to :user
   has_many :images, as: :imageable, dependent: :destroy
   has_one :discover, as: :discoverable, dependent: :destroy
   after_create :add_discover
 
   accepts_nested_attributes_for :images
+
+  # responder is #UserInfo
+  def respond responder
+    self.liked_by responder, vote_scope: "invite"
+    self.user.try(:respond!, responder)
+  end
+
+  def respond_count
+    self.get_likes(vote_scope: "invite").count
+  end
 
   def block!
     self.discover.block = true

@@ -19,7 +19,7 @@ class InviteDiscoversController < ApplicationController
 
   acts_as_token_authentication_handler_for User
 
-  before_action :set_invite_discover, only: [:show]
+  before_action :set_invite_discover, only: [:show, :respond]
   before_action :set_self_invite_discover, only: [:edit, :update, :destroy]
 
   respond_to :html, :json
@@ -31,6 +31,13 @@ class InviteDiscoversController < ApplicationController
 
   def show
     respond_with(@invite_discover)
+  end
+
+  def respond
+    @invite_discover.respond current_user
+    respond_with(@invite_discover) do |format|
+      format.json { render :show }
+    end
   end
 
   def new
