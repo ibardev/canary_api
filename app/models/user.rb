@@ -121,12 +121,22 @@ class User < ActiveRecord::Base
     end
   end
 
+  def unlike! friend
+    if friend.try(:user).present?
+      friend.user.unliked_by self.user_info, vote_scope: "like"
+    end
+  end
+
   def likes
     self.get_likes(vote_scope: "like").order('id DESC')
   end
 
   def respond! responder
     self.liked_by responder, vote_scope: "respond"
+  end
+
+  def unrespond! responder
+    self.unliked_by responder, vote_scope: "respond"
   end
 
   def responders

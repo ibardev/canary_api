@@ -31,6 +31,11 @@ class InviteDiscover < ActiveRecord::Base
     self.user.try(:respond!, responder)
   end
 
+  def unrespond responder
+    self.unliked_by responder, vote_scope: "invite"
+    self.user.try(:unrespond!, responder)
+  end
+
   def respond_count
     self.get_likes(vote_scope: "invite").count
   end

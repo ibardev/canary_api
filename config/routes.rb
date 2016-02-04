@@ -61,6 +61,7 @@ Rails.application.routes.draw do
   resources :invite_discovers, only: [:show, :create, :destroy] do
     member do
       post 'respond'
+      post 'unrespond'
     end
   end
   resources :discovers, only: [:index]
