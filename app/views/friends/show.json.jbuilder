@@ -8,6 +8,7 @@ json.local current_user.same_city? @friend
 json.cover_image photo_url(@friend.cover_image, :product)
 json.cover_image_origin photo_url(@friend.cover_image, :original)
 json.today_follow_count current_user.today_follow_count
+json.like_count @friend.try(:user).try(:like_count)
 
 json.followed current_user.followed?(@friend)
 if current_user.followed? @friend

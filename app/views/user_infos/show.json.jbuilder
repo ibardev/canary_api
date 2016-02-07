@@ -8,4 +8,8 @@ json.collected current_user.collected?(@user_info)
 json.cover_image photo_url(@user_info.cover_image, :product)
 json.cover_image_origin photo_url(@user_info.cover_image, :original)
 
+json.like_count current_user.like_count
+json.follow_count current_user.follow_count
+json.respond_count current_user.respond_count
+
 

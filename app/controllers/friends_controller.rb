@@ -136,6 +136,25 @@ class FriendsController < ApplicationController
     end
   end
 
+  def responders
+    page = params[:page] || 1
+    per_page = params[:per_page] || 10
+    responders = current_user.responders.paginate(page: page, per_page: per_page)
+    @total_pages = responders.total_pages
+    @current_page = responders.current_page
+    @all_count = responders.count
+    @friends = responders.voters
+    respond_with(@friends) do |format|
+      format.json { render :index }
+    end
+  end
+
+  def count
+    @like_count = current_user.like_count
+    @follow_count = current_user.follow_count
+    @respond_count = current_user.respond_count
+  end
+
   def new
     @friend = Friend.new
     respond_with(@friend)

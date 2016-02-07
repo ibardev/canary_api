@@ -36,4 +36,18 @@ FactoryGirl.define do
     authentication_token "qwertyuiop"
   end
 
+  factory :user1, class: User do
+    phone "13813813812"
+    password "abcd.1234"
+    sms_token "1981"
+    authentication_token "qwertyuiop1"
+  end
+
+  factory :user2, class: User do
+    phone "13813813813"
+    password "abcd.1234"
+    sms_token "1981"
+    authentication_token "qwertyuiop2"
+  end
+
 end

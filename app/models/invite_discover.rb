@@ -41,7 +41,11 @@ class InviteDiscover < ActiveRecord::Base
   end
 
   def respond_count
-    self.get_likes(vote_scope: "invite").count
+    self.responders.count
+  end
+
+  def responders
+    self.get_likes(vote_scope: "invite").order('id DESC')
   end
 
   def block!

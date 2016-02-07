@@ -159,6 +159,25 @@ class User < ActiveRecord::Base
     Complain.where(source_compainer: user_info).count
   end
 
+  ############################################
+  # user counts
+  def like_count
+    self.likes.count
+  end
+
+  def follow_count
+    self.followings.count
+  end
+
+  def respond_count
+    self.responders.count
+  end
+
+  def collect_count
+    self.collections.count
+  end
+  ############################################
+
   def same_city? friend, local=true
     city = local ? self.try(:user_info).try(:city) : self.try(:user_info).try(:dest_city)
     city == friend.try(:city)

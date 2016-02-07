@@ -47,6 +47,7 @@ Rails.application.routes.draw do
       get 'foreign'
       get 'count'
       get 'liked'
+      get 'responders'
     end
   end
 

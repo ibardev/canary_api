@@ -69,8 +69,10 @@ RSpec.describe User, type: :model do
 
   describe "User follow" do
     let(:user) { create(:user) }
-    let(:friend1) { create(:user_info) }
-    let(:friend2) { create(:user_info) }
+    let(:user1) { create(:user1) }
+    let(:user2) { create(:user2) }
+    let(:friend1) { create(:user_info, user: user1) }
+    let(:friend2) { create(:user_info, user: user2) }
 
     it "should follow correctly" do
       expect(user.followed? friend1).to eq(false)
