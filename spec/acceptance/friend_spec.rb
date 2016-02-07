@@ -208,6 +208,28 @@ resource "朋友信息相关接口" do
     end
   end
 
+  get "friends/responders" do
+    parameter :page, "页码", required: false
+    parameter :per_page, "每页个数", required: false
+
+    user_attrs = FactoryGirl.attributes_for(:user)
+    user_info_attrs = FactoryGirl.attributes_for(:user_info)
+
+    header "X-User-Token", user_attrs[:authentication_token]
+    header "X-User-Phone", user_attrs[:phone]
+
+    before do
+      create(:user)
+      create_list(:user_info, 3)
+    end
+
+    example "用户响应我的朋友列表信息成功" do
+      do_request
+      puts response_body
+      expect(status).to eq(200)
+    end
+  end
+
 
   get "friends/local" do
     parameter :page, "页码", required: false
