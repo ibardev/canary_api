@@ -3,7 +3,7 @@ json.array!(@discovers) do |discover|
   if discover.user
     user_info = discover.user.user_info
     json.user_info_id user_info.try(:id)
-    json.extract! user_info, :nickname, :carreer, :age, :constellation, :sex
+    json.extract! user_info, :nickname, :carreer, :age, :constellation, :sex, :hotel_type
     json.avatar user_info.avatar.present? ? user_info.avatar.url(:medium) : ""
 
     json.collected current_user.collected?(user_info)
