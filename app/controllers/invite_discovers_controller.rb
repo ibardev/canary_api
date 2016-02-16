@@ -34,14 +34,14 @@ class InviteDiscoversController < ApplicationController
   end
 
   def respond
-    @invite_discover.respond current_user
+    @invite_discover.respond current_user_info
     respond_with(@invite_discover) do |format|
       format.json { render :show }
     end
   end
 
   def unrespond
-    @invite_discover.unrespond current_user
+    @invite_discover.unrespond current_user_info
     respond_with(@invite_discover) do |format|
       format.json { render :show }
     end

@@ -36,8 +36,8 @@ class InviteDiscover < ActiveRecord::Base
     self.user.try(:unrespond!, responder)
   end
 
-  def respond? user
-    user.voted_up_on? self, vote_scope: "invite"
+  def respond? user_info
+    user_info.voted_up_on? self, vote_scope: "invite"
   end
 
   def respond_count
