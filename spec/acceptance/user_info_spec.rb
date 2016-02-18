@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require 'acceptance_helper'
 
 resource "用户相关接口" do
@@ -106,9 +108,9 @@ resource "用户相关接口" do
     header "X-User-Phone", user_attrs[:phone]
     image_attrs = FactoryGirl.attributes_for(:image, photo_type: "pic")
 
-    parameter :pictures_attributes, "个人照片墙图片", require: true, scope: :user_info
+    parameter :pictures_attributes, "个人照片墙图片", require: true
 
-    let(:pictures_attributes) { [image_attrs, image_attrs] }
+    let(:pictures_attributes) { [] }
 
     before do
       @user = create(:user)

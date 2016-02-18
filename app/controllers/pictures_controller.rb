@@ -49,7 +49,7 @@ class PicturesController < ApplicationController
     end
 
     def picture_params
-      params.require(:user_info).permit(
+      params.permit(
         pictures_attributes: [:id, :photo, :_destroy]
         )
     end
