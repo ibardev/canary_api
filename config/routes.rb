@@ -28,7 +28,7 @@ Rails.application.routes.draw do
       post 'check'
       post 'reset'
     end
-    resources :pictures
+    resources :pictures, only: [:index, :create]
   end
 
   resources :friends, only: [:index, :show] do
@@ -39,6 +39,7 @@ Rails.application.routes.draw do
       post 'info'
       post 'like'
       resources :complains, only: [:create]
+      resources :pictures, only: [:index]
     end
     collection do
       get 'collected'

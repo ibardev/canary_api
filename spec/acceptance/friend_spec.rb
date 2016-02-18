@@ -344,4 +344,28 @@ resource "朋友信息相关接口" do
     end
   end
 
+
+  get "friends/:id/pictures" do
+    user_attrs = FactoryGirl.attributes_for(:user)
+    user_info_attrs = FactoryGirl.attributes_for(:user_info)
+
+    header "X-User-Token", user_attrs[:authentication_token]
+    header "X-User-Phone", user_attrs[:phone]
+
+    before do
+      @user = create(:user)
+      @friend_user = create(:user, phone: "13850696686")
+      @friend = create(:user_info, user: @friend_user)
+      @friend_user.user_info.pictures.create(FactoryGirl.attributes_for(:image, photo_type: "pic"))
+      @friend_user.user_info.pictures.create(FactoryGirl.attributes_for(:image, photo_type: "pic"))
+    end
+    let(:id) { @friend.id }
+
+    example "查看具体朋友的详细信息成功" do
+      do_request
+      puts response_body
+      expect(status).to eq(200)  
+    end
+  end
+
 end

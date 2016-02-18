@@ -6,7 +6,8 @@ class PicturesController < ApplicationController
   respond_to :html, :json
 
   def index
-    @pictures = current_user_info.pictures
+    user_info = params[:id].present? ? UserInfo.find(params[:id]) : current_user_info
+    @pictures = user_info.pictures
     respond_with(@pictures)
   end
 
