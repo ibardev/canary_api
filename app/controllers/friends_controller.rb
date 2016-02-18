@@ -2,7 +2,7 @@ class FriendsController < ApplicationController
 
   acts_as_token_authentication_handler_for User
 
-  before_action :set_friend, only: [:show, :follow, :collect, :uncollect, :info, :count, :like]
+  before_action :set_friend, only: [:show, :follow, :collect, :uncollect, :info, :like]
 
   respond_to :html, :json
 
