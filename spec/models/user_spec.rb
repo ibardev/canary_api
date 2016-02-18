@@ -32,6 +32,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   it { should have_one(:user_info) } 
+  it { should have_one(:user_count) } 
 
   describe "User collection" do
     let(:user) { create(:user) }

@@ -98,6 +98,7 @@ class FriendsController < ApplicationController
     @current_page = followings.current_page
     @all_count = followings.count
     @friends = followings.voters
+    current_user.get_user_count.update_attributes(follow_index: followings.try(:first).try(:id))
     respond_with(@friends) do |format|
       format.json { render :index }
     end
@@ -131,6 +132,7 @@ class FriendsController < ApplicationController
     @current_page = likes.current_page
     @all_count = likes.count
     @friends = likes.voters
+    current_user.get_user_count.update_attributes(like_index: likes.try(:first).try(:id))
     respond_with(@friends) do |format|
       format.json { render :index }
     end
@@ -144,6 +146,7 @@ class FriendsController < ApplicationController
     @current_page = responders.current_page
     @all_count = responders.count
     @friends = responders.voters
+    current_user.get_user_count.update_attributes(respond_index: responders.try(:first).try(:id))
     respond_with(@friends) do |format|
       format.json { render :index }
     end
@@ -153,6 +156,9 @@ class FriendsController < ApplicationController
     @like_count = current_user.like_count
     @follow_count = current_user.follow_count
     @respond_count = current_user.respond_count
+    @new_like = current_user.get_user_count.try(:new_like?)
+    @new_follow = current_user.get_user_count.try(:new_follow?)
+    @new_respond = current_user.get_user_count.try(:new_respond?)
   end
 
   def new

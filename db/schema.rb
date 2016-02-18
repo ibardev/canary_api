@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151205093621) do
+ActiveRecord::Schema.define(version: 20160218025400) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -113,6 +113,17 @@ ActiveRecord::Schema.define(version: 20151205093621) do
   end
 
   add_index "sms_tokens", ["phone"], name: "index_sms_tokens_on_phone"
+
+  create_table "user_counts", force: :cascade do |t|
+    t.integer  "like_index"
+    t.integer  "follow_index"
+    t.integer  "respond_index"
+    t.integer  "user_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "user_counts", ["user_id"], name: "index_user_counts_on_user_id"
 
   create_table "user_discovers", force: :cascade do |t|
     t.integer  "user_id"

@@ -35,6 +35,8 @@ class User < ActiveRecord::Base
 
   attr_accessor :sms_token
   has_one :user_info, dependent: :destroy
+  has_one :user_count, dependent: :destroy
+
   accepts_nested_attributes_for :user_info, allow_destroy: true
   
   # Include default devise modules. Others available are:
@@ -72,6 +74,10 @@ class User < ActiveRecord::Base
 
   def name
     phone
+  end
+
+  def get_user_count
+    user_count || create_user_count
   end
 
   def banned?
