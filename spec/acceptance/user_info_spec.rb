@@ -79,4 +79,46 @@ resource "用户相关接口" do
     end
   end
 
+  get 'user_info/pictures' do
+    user_attrs = FactoryGirl.attributes_for(:user)
+    user_info_attrs = FactoryGirl.attributes_for(:user_info)
+    header "X-User-Token", user_attrs[:authentication_token]
+    header "X-User-Phone", user_attrs[:phone]
+
+    before do
+      @user = create(:user)
+      @user.user_info.pictures.create(FactoryGirl.attributes_for(:image, photo_type: "pic"))
+      @user.user_info.pictures.create(FactoryGirl.attributes_for(:image, photo_type: "pic"))
+    end
+
+    example "获取用户的照片墙信息" do
+      do_request
+      puts response_body
+      expect(status).to eq(200)
+    end
+
+  end
+
+  post 'user_info/pictures' do
+    user_attrs = FactoryGirl.attributes_for(:user)
+    user_info_attrs = FactoryGirl.attributes_for(:user_info)
+    header "X-User-Token", user_attrs[:authentication_token]
+    header "X-User-Phone", user_attrs[:phone]
+    image_attrs = FactoryGirl.attributes_for(:image, photo_type: "pic")
+
+    parameter :pictures_attributes, "个人照片墙图片", require: true, scope: :user_info
+
+    let(:pictures_attributes) { [image_attrs, image_attrs] }
+
+    before do
+      @user = create(:user)
+    end
+
+    example "用户更新个人照片墙图片" do
+      do_request
+      puts response_body
+      expect(status).to eq(201)
+    end
+  end
+
 end

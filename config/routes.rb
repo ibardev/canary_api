@@ -28,6 +28,7 @@ Rails.application.routes.draw do
       post 'check'
       post 'reset'
     end
+    resources :pictures
   end
 
   resources :friends, only: [:index, :show] do

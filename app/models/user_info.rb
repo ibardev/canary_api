@@ -45,10 +45,12 @@ class UserInfo < ActiveRecord::Base
   validates_attachment_content_type :avatar, content_type: /image\/.*\Z/
 
   has_one :cover_image, -> { where photo_type: "cover" }, class_name: "Image", as: :imageable, dependent: :destroy
+  has_many :pictures, -> { where photo_type: "pic" }, class_name: "Image", as: :imageable, dependent: :destroy
 
   delegate :phone, :ban, :sign_in_count, :current_sign_in_at, to: :user
 
   accepts_nested_attributes_for :cover_image, allow_destroy: true
+  accepts_nested_attributes_for :pictures, allow_destroy: true
 
   scope :same_sex, ->(sex) { where(sex: sex) }
   scope :opposite_sex, ->(sex) { where.not(sex: sex) }
