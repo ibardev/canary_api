@@ -29,17 +29,19 @@ Rails.application.routes.draw do
       post 'reset'
     end
     resources :pictures, only: [:index, :create]
+    # resources :discovers, only: [:index]
   end
 
   resources :friends, only: [:index, :show] do
+    resources :pictures, only: [:index]
+    resources :complains, only: [:create]
+    # resources :discovers, only: [:index]
     member do
       post 'follow'
       post 'collect'
       post 'uncollect'
       post 'info'
       post 'like'
-      resources :complains, only: [:create]
-      resources :pictures, only: [:index]
     end
     collection do
       get 'collected'
@@ -52,6 +54,9 @@ Rails.application.routes.draw do
       get 'responders'
     end
   end
+
+  get '/user_info/discovers' => 'discovers#user_index'
+  get '/friends/:friend_id/discovers' => 'discovers#friend_index'
 
   resources :complains, only: [:show]
 

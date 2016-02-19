@@ -345,7 +345,7 @@ resource "朋友信息相关接口" do
   end
 
 
-  get "friends/:id/pictures" do
+  get "friends/:friend_id/pictures" do
     user_attrs = FactoryGirl.attributes_for(:user)
     user_info_attrs = FactoryGirl.attributes_for(:user_info)
 
@@ -359,12 +359,35 @@ resource "朋友信息相关接口" do
       @friend_user.user_info.pictures.create(FactoryGirl.attributes_for(:image, photo_type: "pic"))
       @friend_user.user_info.pictures.create(FactoryGirl.attributes_for(:image, photo_type: "pic"))
     end
-    let(:id) { @friend.id }
+    let(:friend_id) { @friend.id }
 
     example "查看具体朋友的详细信息成功" do
       do_request
       puts response_body
       expect(status).to eq(200)  
+    end
+  end
+
+  get 'friends/:friend_id/discovers' do
+    user_attrs = FactoryGirl.attributes_for(:user)
+    user_info_attrs = FactoryGirl.attributes_for(:user_info)
+
+    header "X-User-Token", user_attrs[:authentication_token]
+    header "X-User-Phone", user_attrs[:phone]
+
+    before do
+      @user = create(:user)
+      @user.user_info.update_attributes(user_info_attrs)
+      @friend_user = create(:user, phone: "13850696686")
+      @friend = create(:user_info, user: @friend_user)
+      @invite_discovers = create_list(:invite_discover, 3, user: @friend_user)
+    end
+    let(:friend_id) { @friend.id }
+
+    example "获取朋友的发现列表成功" do
+      do_request
+      puts response_body
+      expect(status).to eq(200)
     end
   end
 

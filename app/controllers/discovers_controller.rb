@@ -31,6 +31,21 @@ class DiscoversController < ApplicationController
     respond_with(@discovers)
   end
 
+  def user_index
+    page = params[:page] || 1
+    per_page = params[:per_page] || 10
+    @discovers = current_user.discovers.unblock.available.paginate(page: page, per_page: per_page)
+    respond_with @discovers, template: 'discovers/index'
+  end
+
+  def friend_index
+    page = params[:page] || 1
+    per_page = params[:per_page] || 10
+    friend_user = UserInfo.find(params[:friend_id]).try(:user)
+    @discovers = friend_user.discovers.unblock.available.paginate(page: page, per_page: per_page)
+    respond_with @discovers, template: 'discovers/index'
+  end
+
   def show
     respond_with(@discover)
   end

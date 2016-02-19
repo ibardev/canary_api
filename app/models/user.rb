@@ -37,6 +37,8 @@ class User < ActiveRecord::Base
   has_one :user_info, dependent: :destroy
   has_one :user_count, dependent: :destroy
 
+  has_many :discovers, -> { where(discoverable_type: "InviteDiscover") }, dependent: :destroy
+
   accepts_nested_attributes_for :user_info, allow_destroy: true
   
   # Include default devise modules. Others available are:
