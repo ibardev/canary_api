@@ -14,7 +14,6 @@ json.array!(@discovers) do |discover|
 
   json.extract! discover, :id, :discoverable_type, :discoverable_id, :updated_at
 
-  json.discoverable_id discover.discoverable.id
   json.detail discover.discoverable.as_json
 
 
