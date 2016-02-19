@@ -35,16 +35,14 @@ class InviteDiscoversController < ApplicationController
 
   def respond
     @invite_discover.respond current_user_info
-    respond_with(@invite_discover) do |format|
-      format.json { render :show }
-    end
+
+    respond_with(@invite_discover, template: "invite_discovers/show")
   end
 
   def unrespond
     @invite_discover.unrespond current_user_info
-    respond_with(@invite_discover) do |format|
-      format.json { render :show }
-    end
+
+    respond_with(@invite_discover, template: "invite_discovers/show")
   end
 
   def new
