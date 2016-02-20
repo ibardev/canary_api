@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160218025400) do
+ActiveRecord::Schema.define(version: 20160220162751) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -104,6 +104,12 @@ ActiveRecord::Schema.define(version: 20160218025400) do
   end
 
   add_index "invite_discovers", ["user_id"], name: "index_invite_discovers_on_user_id"
+
+  create_table "messages", force: :cascade do |t|
+    t.text     "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "sms_tokens", force: :cascade do |t|
     t.string   "phone"

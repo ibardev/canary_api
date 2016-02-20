@@ -29,6 +29,7 @@ Rails.application.routes.draw do
       post 'reset'
     end
     resources :pictures, only: [:index, :create]
+    resources :messages, only: [:index]
     # resources :discovers, only: [:index]
   end
 
@@ -62,6 +63,7 @@ Rails.application.routes.draw do
   resources :complains, only: [:show]
 
   resources :banners, only: [:index]
+
 
   ######################################################
 
