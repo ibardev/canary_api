@@ -84,10 +84,8 @@ class FriendsController < ApplicationController
     @total_pages = followers.total_pages
     @current_page = followers.current_page
     @all_count = followers.count
-    @friends = followers.voters
-    respond_with(@friends) do |format|
-      format.json { render :index }
-    end
+    @friends = followers
+    respond_with @friends, template: "friends/vote_index"
   end
 
   def followings
@@ -97,11 +95,9 @@ class FriendsController < ApplicationController
     @total_pages = followings.total_pages
     @current_page = followings.current_page
     @all_count = followings.count
-    @friends = followings.voters
+    @friends = followings
     current_user.get_user_count.update_attributes(follow_index: followings.try(:first).try(:id))
-    respond_with(@friends) do |format|
-      format.json { render :index }
-    end
+    respond_with @friends, template: "friends/vote_index"
   end
 
   def collected
@@ -111,10 +107,8 @@ class FriendsController < ApplicationController
     @total_pages = collections.total_pages
     @current_page = collections.current_page
     @all_count = collections.count
-    @friends = collections.voters
-    respond_with(@friends) do |format|
-      format.json { render :index }
-    end
+    @friends = collections
+    respond_with @friends, template: "friends/vote_index"
   end
 
   def like
@@ -131,11 +125,9 @@ class FriendsController < ApplicationController
     @total_pages = likes.total_pages
     @current_page = likes.current_page
     @all_count = likes.count
-    @friends = likes.voters
+    @friends = likes
     current_user.get_user_count.update_attributes(like_index: likes.try(:first).try(:id))
-    respond_with(@friends) do |format|
-      format.json { render :index }
-    end
+    respond_with @friends, template: "friends/vote_index"
   end
 
   def responders
@@ -145,11 +137,9 @@ class FriendsController < ApplicationController
     @total_pages = responders.total_pages
     @current_page = responders.current_page
     @all_count = responders.count
-    @friends = responders.voters
+    @friends = responders
     current_user.get_user_count.update_attributes(respond_index: responders.try(:first).try(:id))
-    respond_with(@friends) do |format|
-      format.json { render :index }
-    end
+    respond_with @friends, template: "friends/vote_index"
   end
 
   def count
