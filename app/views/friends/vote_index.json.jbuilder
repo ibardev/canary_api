@@ -5,7 +5,7 @@ json.local_count @local_count if @local_count.present?
 json.foreign_count @foreign_count if @foreign_count.present?
 
 json.friends(@friends) do |friend_vote|
-  friend = friend.voter
+  friend = friend_vote.voter
   json.created_at friend_vote.created_at
   json.extract! friend, :id, :sex, :nickname, :slogan, :age, :constellation, :hotel_type, :carreer
   json.avatar friend.avatar.present? ? friend.avatar.url(:medium) : ""
