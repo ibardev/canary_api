@@ -9,6 +9,7 @@
 #  user_id       :integer
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  message_index :integer
 #
 # Indexes
 #
@@ -28,5 +29,9 @@ class UserCount < ActiveRecord::Base
 
   def new_respond?
     user.responders.first.try(:id).to_i > respond_index.to_i
+  end
+
+  def new_message?
+    Message.all.first.try(:id).to_i > message_index.to_i
   end
 end

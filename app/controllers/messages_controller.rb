@@ -1,10 +1,25 @@
+# == Schema Information
+#
+# Table name: messages
+#
+#  id         :integer          not null, primary key
+#  content    :text
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 class MessagesController < ApplicationController
+
+  acts_as_token_authentication_handler_for User
+
   before_action :set_message, only: [:show, :edit, :update, :destroy]
 
   respond_to :html, :json
 
   def index
     @messages = Message.all
+    current_user.get_user_count.update_attributes(message_index: @messages.try(:first).try(:id))
+
     respond_with(@messages)
   end
 

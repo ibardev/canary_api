@@ -157,9 +157,11 @@ class FriendsController < ApplicationController
     @like_count = current_user.like_count
     @follow_count = current_user.follow_count
     @respond_count = current_user.respond_count
+    @message_count = Message.count
     @new_like = current_user.get_user_count.try(:new_like?)
     @new_follow = current_user.get_user_count.try(:new_follow?)
     @new_respond = current_user.get_user_count.try(:new_respond?)
+    @new_message = current_user.get_user_count.try(:new_message?)
   end
 
   def new
