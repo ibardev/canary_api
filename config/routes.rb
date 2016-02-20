@@ -52,6 +52,7 @@ Rails.application.routes.draw do
       get 'count'
       get 'liked'
       get 'responders'
+      get 'invite_responds'
     end
   end
 

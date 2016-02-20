@@ -150,6 +150,30 @@ resource "发现相关接口" do
     end
   end
 
+  get "friends/invite_responds" do
+    user_attrs = FactoryGirl.attributes_for(:user)
+    user_info_attrs = FactoryGirl.attributes_for(:user_info)
+
+    header "X-User-Token", user_attrs[:authentication_token]
+    header "X-User-Phone", user_attrs[:phone]
+
+    before do
+      @user = create(:user)
+      @user1 = create(:user, phone: "13813813812", authentication_token: "adfkljasdf")
+      @user1.user_info.update_attributes(user_info_attrs)
+      @invite_discovers = create_list(:invite_discover, 3, user: @user)
+      @invite_discovers.each do |invite_discover|
+        invite_discover.respond @user1.user_info
+      end
+    end
+
+    example "用户获取响应的列表" do
+      do_request
+      puts response_body
+      expect(status).to eq(200)
+    end
+  end
+
   get "banners" do
     before do
       create_list(:banner, 3)

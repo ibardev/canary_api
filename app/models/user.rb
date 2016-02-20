@@ -38,6 +38,8 @@ class User < ActiveRecord::Base
   has_one :user_count, dependent: :destroy
 
   has_many :discovers, -> { where(discoverable_type: "InviteDiscover") }, dependent: :destroy
+  has_many :invite_discovers
+  has_many :invite_responds, through: :invite_discovers, source: :votes
 
   accepts_nested_attributes_for :user_info, allow_destroy: true
   

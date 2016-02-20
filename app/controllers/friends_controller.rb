@@ -142,6 +142,17 @@ class FriendsController < ApplicationController
     respond_with @friends, template: "friends/vote_index"
   end
 
+  def invite_responds
+    page = params[:page] || 1
+    per_page = params[:per_page] || 10
+    @invite_responds = current_user.invite_responds.paginate(page: page, per_page: per_page)
+    @total_pages = @invite_responds.total_pages
+    @current_page = @invite_responds.current_page
+    @all_count = @invite_responds.count
+    current_user.get_user_count.update_attributes(respond_index: @invite_responds.try(:first).try(:id))
+    respond_with @invite_responds
+  end
+
   def count
     @like_count = current_user.like_count
     @follow_count = current_user.follow_count

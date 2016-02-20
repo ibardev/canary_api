@@ -21,6 +21,8 @@ class InviteDiscover < ActiveRecord::Base
   belongs_to :user
   has_many :images, as: :imageable, dependent: :destroy
   has_one :discover, as: :discoverable, dependent: :destroy
+  has_many :votes, class_name: "ActsAsVotable::Vote", as: :votable
+
   after_create :add_discover
 
   accepts_nested_attributes_for :images
