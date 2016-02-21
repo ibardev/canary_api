@@ -144,11 +144,17 @@ resource "用户相关接口" do
   end
 
   get 'user_info/messages' do
+    parameter :page, "页码", required: false
+    parameter :per_page, "每页个数", required: false
+
     user_attrs = FactoryGirl.attributes_for(:user)
     user_info_attrs = FactoryGirl.attributes_for(:user_info)
 
     header "X-User-Token", user_attrs[:authentication_token]
     header "X-User-Phone", user_attrs[:phone]
+
+    let(:page) { 1 }
+    let(:per_page) { 10 }
 
     before do
       @user = create(:user)
@@ -156,7 +162,7 @@ resource "用户相关接口" do
       @messages = create_list(:message, 3)
     end
 
-    example "用户获取自己的发现列表成功" do
+    example "用户获取消息列表成功" do
       do_request
       puts response_body
       expect(status).to eq(200)
