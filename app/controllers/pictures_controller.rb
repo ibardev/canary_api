@@ -50,7 +50,7 @@ class PicturesController < ApplicationController
 
     def picture_params
       params.permit(
-        pictures_attributes: [:id, :photo, :_destroy]
+        pictures_attributes: [:id, :photo, :photo_type, :_destroy]
         )
     end
 end
