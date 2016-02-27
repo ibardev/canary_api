@@ -28,6 +28,7 @@ class FriendsController < ApplicationController
     else
       @friends = UserInfo.available.opposite_sex(current_user_info[:sex]).match(current_user_info.city).current_sign_in_desc.paginate(page: page, per_page: per_page)
       @local_count = UserInfo.available.opposite_sex(current_user_info[:sex]).local(current_user_info.city).count
+      @all_count = @friends.count
       @foreign_count = @all_count - @local_count
     end
     @all_count = @friends.count
@@ -48,6 +49,7 @@ class FriendsController < ApplicationController
     else
       @friends = UserInfo.available.opposite_sex(current_user_info[:sex]).match(current_user_info.dest_city).current_sign_in_desc.paginate(page: page, per_page: per_page)
       @local_count = UserInfo.available.opposite_sex(current_user_info[:sex]).local(current_user_info.dest_city).count
+      @all_count = @friends.count
       @foreign_count = @all_count - @local_count
     end
     @all_count = @friends.count
