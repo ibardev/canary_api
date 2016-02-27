@@ -235,6 +235,7 @@ resource "朋友信息相关接口" do
     parameter :page, "页码", required: false
     parameter :per_page, "每页个数", required: false
     parameter :api_verison, "api版本", required: false
+    parameter :type, "在查询列表中过滤本地和异地，【local, foreign】，全部的可不加该参数", require: false
 
     user_attrs = FactoryGirl.attributes_for(:user)
     user_info_attrs = FactoryGirl.attributes_for(:user_info)
@@ -258,6 +259,7 @@ resource "朋友信息相关接口" do
     parameter :page, "页码", required: false
     parameter :per_page, "每页个数", required: false
     parameter :api_verison, "api版本", required: false
+    parameter :type, "在查询列表中过滤本地和异地，【local, foreign】，全部的可不加该参数", require: false
 
     user_attrs = FactoryGirl.attributes_for(:user)
     user_info_attrs = FactoryGirl.attributes_for(:user_info)

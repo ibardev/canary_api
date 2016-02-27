@@ -19,11 +19,18 @@ class FriendsController < ApplicationController
   def local
     page = params[:page] || 1
     per_page = params[:per_page] || 10
+    query_type = params[:type] || "all"
     @local = true
-    @friends = UserInfo.available.opposite_sex(current_user_info[:sex]).match(current_user_info.city).current_sign_in_desc.paginate(page: page, per_page: per_page)
+    if query_type == "local"
+      @friends = UserInfo.available.opposite_sex(current_user_info[:sex]).local(current_user_info.city).current_sign_in_desc.paginate(page: page, per_page: per_page)
+    elsif query_type == "foreign"
+      @friends = UserInfo.available.opposite_sex(current_user_info[:sex]).foreign(current_user_info.city).current_sign_in_desc.paginate(page: page, per_page: per_page)
+    else
+      @friends = UserInfo.available.opposite_sex(current_user_info[:sex]).match(current_user_info.city).current_sign_in_desc.paginate(page: page, per_page: per_page)
+      @local_count = UserInfo.available.opposite_sex(current_user_info[:sex]).local(current_user_info.city).count
+      @foreign_count = @all_count - @local_count
+    end
     @all_count = @friends.count
-    @local_count = UserInfo.available.opposite_sex(current_user_info[:sex]).local(current_user_info.city).count
-    @foreign_count = @all_count - @local_count
     respond_with(@friends) do |format|
       format.json { render :index }
     end
@@ -32,14 +39,25 @@ class FriendsController < ApplicationController
   def foreign
     page = params[:page] || 1
     per_page = params[:per_page] || 10
+    query_type = params[:type] || "all"
     @local = false
-    @friends = UserInfo.available.opposite_sex(current_user_info[:sex]).match(current_user_info.dest_city).current_sign_in_desc.paginate(page: page, per_page: per_page)
+    if query_type == "local"
+      @friends = UserInfo.available.opposite_sex(current_user_info[:sex]).local(current_user_info.dest_city).current_sign_in_desc.paginate(page: page, per_page: per_page)
+    elsif query_type == "foreign"
+      @friends = UserInfo.available.opposite_sex(current_user_info[:sex]).foreign(current_user_info.dest_city).current_sign_in_desc.paginate(page: page, per_page: per_page)
+    else
+      @friends = UserInfo.available.opposite_sex(current_user_info[:sex]).match(current_user_info.dest_city).current_sign_in_desc.paginate(page: page, per_page: per_page)
+      @local_count = UserInfo.available.opposite_sex(current_user_info[:sex]).local(current_user_info.dest_city).count
+      @foreign_count = @all_count - @local_count
+    end
     @all_count = @friends.count
-    @local_count = UserInfo.available.opposite_sex(current_user_info[:sex]).local(current_user_info.dest_city).count
-    @foreign_count = @all_count - @local_count
     respond_with(@friends) do |format|
       format.json { render :index }
     end
+  end
+
+  def local_local
+    
   end
 
   def show
