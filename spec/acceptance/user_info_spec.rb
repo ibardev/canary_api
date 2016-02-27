@@ -110,7 +110,7 @@ resource "用户相关接口" do
 
     parameter :pictures_attributes, "个人照片墙图片", require: true
 
-    let(:pictures_attributes) { [image_attrs, image_attrs] }
+    # let(:pictures_attributes) { [image_attrs, image_attrs] }
 
     before do
       @user = create(:user)
