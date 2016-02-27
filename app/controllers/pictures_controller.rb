@@ -24,13 +24,18 @@ class PicturesController < ApplicationController
   end
 
   def create
-    current_user_info.pictures.destroy_all
     current_user_info.update(picture_params)
     current_user_info.save
     @pictures = current_user_info.pictures
-    respond_with(@pictures) do |format|
-      format.json { render :index, status: 201 }
+    respond_with(@pictures, template: "pictures/index", status: 201)
+  end
+
+  def delete
+    delete_params[:ids].each do |id|
+      current_user_info.pictures.find(id).destroy rescue next
     end
+    @pictures = current_user_info.pictures
+    respond_with(@pictures, template: "pictures/index", status: 201)
   end
 
   def update
@@ -52,5 +57,9 @@ class PicturesController < ApplicationController
       params.permit(
         pictures_attributes: [:id, :photo, :photo_type, :_destroy]
         )
+    end
+
+    def delete_params
+      params.require(:pictures).permit(ids:[])
     end
 end

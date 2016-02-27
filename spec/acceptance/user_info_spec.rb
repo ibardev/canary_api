@@ -4,7 +4,7 @@ require 'acceptance_helper'
 
 resource "用户相关接口" do
   header "Accept", "application/json"
-  header "Content-Type", "application/json"
+  # header "Content-Type", "application/json"
 
   get "user_info" do
     user_attrs = FactoryGirl.attributes_for(:user)
@@ -110,10 +110,11 @@ resource "用户相关接口" do
 
     parameter :pictures_attributes, "个人照片墙图片", require: true
 
-    let(:pictures_attributes) { [] }
+    let(:pictures_attributes) { [image_attrs, image_attrs] }
 
     before do
       @user = create(:user)
+      @user.user_info.pictures.create(FactoryGirl.attributes_for(:image, photo_type: "pic"))
     end
 
     example "用户更新个人照片墙图片" do
@@ -121,6 +122,30 @@ resource "用户相关接口" do
       puts response_body
       expect(status).to eq(201)
     end
+  end
+
+  post 'user_info/pictures/delete' do
+    user_attrs = FactoryGirl.attributes_for(:user)
+    user_info_attrs = FactoryGirl.attributes_for(:user_info)
+    header "X-User-Token", user_attrs[:authentication_token]
+    header "X-User-Phone", user_attrs[:phone]
+
+    parameter :ids, "删除的照片id列表（需要从列表获得）", require: true, scope: :pictures
+
+    before do
+      @user = create(:user)
+      @user.user_info.pictures.create(FactoryGirl.attributes_for(:image, photo_type: "pic"))
+      @user.user_info.pictures.create(FactoryGirl.attributes_for(:image, photo_type: "pic"))
+      @user.user_info.pictures.create(FactoryGirl.attributes_for(:image, photo_type: "pic"))
+    end
+    let(:ids) { [1,2] }
+
+    example "删除指定照片墙信息" do
+      do_request
+      puts response_body
+      expect(status).to eq(201)
+    end
+
   end
 
   get 'user_info/discovers' do

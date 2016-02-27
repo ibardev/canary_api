@@ -28,7 +28,11 @@ Rails.application.routes.draw do
       post 'check'
       post 'reset'
     end
-    resources :pictures, only: [:index, :create]
+    resources :pictures, only: [:index, :create] do
+      collection do
+        post 'delete'
+      end
+    end
     resources :messages, only: [:index]
     # resources :discovers, only: [:index]
   end
