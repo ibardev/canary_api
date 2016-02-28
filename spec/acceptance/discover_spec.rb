@@ -150,12 +150,15 @@ resource "发现相关接口" do
     end
   end
 
-  get "friends/invite_responds" do
+  get "invite_discovers/:id/responds" do
     user_attrs = FactoryGirl.attributes_for(:user)
     user_info_attrs = FactoryGirl.attributes_for(:user_info)
 
     header "X-User-Token", user_attrs[:authentication_token]
     header "X-User-Phone", user_attrs[:phone]
+
+    parameter :page, "页码", required: false
+    parameter :per_page, "每页个数", required: false
 
     before do
       @user = create(:user)
@@ -167,7 +170,9 @@ resource "发现相关接口" do
       end
     end
 
-    example "用户获取响应的列表" do
+    let(:id) { @invite_discovers.first.id }
+
+    example "获取某一条邀约的响应列表" do
       do_request
       puts response_body
       expect(status).to eq(200)

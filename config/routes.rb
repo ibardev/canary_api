@@ -77,6 +77,7 @@ Rails.application.routes.draw do
     member do
       post 'respond'
       post 'unrespond'
+      get 'responds'
     end
   end
   resources :discovers, only: [:index]

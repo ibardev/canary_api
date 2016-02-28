@@ -19,7 +19,7 @@ class InviteDiscoversController < ApplicationController
 
   acts_as_token_authentication_handler_for User
 
-  before_action :set_invite_discover, only: [:show, :respond, :unrespond]
+  before_action :set_invite_discover, only: [:show, :respond, :unrespond, :responds]
   before_action :set_self_invite_discover, only: [:edit, :update, :destroy]
 
   respond_to :html, :json
@@ -43,6 +43,16 @@ class InviteDiscoversController < ApplicationController
     @invite_discover.unrespond current_user_info
 
     respond_with(@invite_discover, template: "invite_discovers/show")
+  end
+
+  def responds
+    page = params[:page] || 1
+    per_page = params[:per_page] || 10
+    @invite_responds = @invite_discover.votes.paginate(page: page, per_page: per_page)
+    @total_pages = @invite_responds.total_pages
+    @current_page = @invite_responds.current_page
+    @all_count = @invite_responds.count
+    respond_with @invite_responds, template: "friends/invite_responds"
   end
 
   def new
