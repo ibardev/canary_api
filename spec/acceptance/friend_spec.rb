@@ -390,7 +390,7 @@ resource "朋友信息相关接口" do
     end
     let(:friend_id) { @friend.id }
 
-    example "查看具体朋友的详细信息成功" do
+    example "查看朋友的照片墙信息成功" do
       do_request
       puts response_body
       expect(status).to eq(200)  
