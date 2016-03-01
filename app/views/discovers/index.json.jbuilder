@@ -15,6 +15,7 @@ json.array!(@discovers) do |discover|
   json.extract! discover, :id, :discoverable_type, :discoverable_id, :updated_at
 
   json.detail discover.discoverable.as_json
+  json.share_url invite_discover_url(discover.discoverable) if discover.discoverable_type == 'InviteDiscover'
 
 
 end

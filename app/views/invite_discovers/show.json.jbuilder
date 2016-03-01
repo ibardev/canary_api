@@ -1,5 +1,6 @@
 json.extract! @invite_discover, :user_id, :begin_date, :end_date, :content, :updated_at
 json.respond_count @invite_discover.respond_count
+json.share_url invite_discover_url(@invite_discover)
 
 if @invite_discover.user
   user_info = @invite_discover.user.user_info
