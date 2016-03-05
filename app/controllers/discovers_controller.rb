@@ -28,6 +28,7 @@ class DiscoversController < ApplicationController
     page = params[:page] || 1
     per_page = params[:per_page] || 10
     @discovers = Discover.unblock.available.paginate(page: page, per_page: per_page)
+    current_user.get_user_count.update_attributes(discover_index: @discovers.try(:first).try(:id))
     respond_with(@discovers)
   end
 

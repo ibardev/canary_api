@@ -2,14 +2,15 @@
 #
 # Table name: user_counts
 #
-#  id            :integer          not null, primary key
-#  like_index    :integer
-#  follow_index  :integer
-#  respond_index :integer
-#  user_id       :integer
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  message_index :integer
+#  id             :integer          not null, primary key
+#  like_index     :integer
+#  follow_index   :integer
+#  respond_index  :integer
+#  user_id        :integer
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  message_index  :integer
+#  discover_index :integer
 #
 # Indexes
 #
@@ -33,5 +34,9 @@ class UserCount < ActiveRecord::Base
 
   def new_message?
     Message.all.first.try(:id).to_i > message_index.to_i
+  end
+
+  def new_discover?
+    Discover.all.first.try(:id).to_i > discover_index.to_i
   end
 end

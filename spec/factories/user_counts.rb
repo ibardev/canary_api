@@ -2,14 +2,15 @@
 #
 # Table name: user_counts
 #
-#  id            :integer          not null, primary key
-#  like_index    :integer
-#  follow_index  :integer
-#  respond_index :integer
-#  user_id       :integer
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  message_index :integer
+#  id             :integer          not null, primary key
+#  like_index     :integer
+#  follow_index   :integer
+#  respond_index  :integer
+#  user_id        :integer
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  message_index  :integer
+#  discover_index :integer
 #
 # Indexes
 #

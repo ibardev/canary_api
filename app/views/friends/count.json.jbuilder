@@ -6,3 +6,4 @@ json.new_like @new_like
 json.new_follow @new_follow
 json.new_respond @new_respond
 json.new_message @new_message
+json.new_discover @new_discover
