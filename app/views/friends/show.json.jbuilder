@@ -1,6 +1,7 @@
-json.extract! @friend, :id, :sex, :nickname, :birth, :age, :constellation, :oversea, :dest_province, :dest_city, 
+json.extract! @friend, :id, :sex, :nickname, :birth, :age, :constellation, :dest_province, :dest_city, 
   :province, :city, :slogan, :train, :flight, :hotel_type, :carreer,
   :created_at, :updated_at
+json.oversea @friend.oversea || false
 json.avatar @friend.avatar.present? ? @friend.avatar.url(:medium) : ""
 json.avatar_origin @friend.avatar.present? ? @friend.avatar.url(:original) : ""
 json.collected current_user.collected?(@friend)

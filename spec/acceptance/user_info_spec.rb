@@ -37,6 +37,7 @@ resource "用户相关接口" do
     parameter :nickname, "昵称", required: false, scope: :user_info
     parameter :birth, "生日", required: false, scope: :user_info
     parameter :sex, "性别【男: male, 女: female】", required: false, scope: :user_info
+    parameter :oversea, "是否国际", required: false, scope: :user_info
     parameter :dest_province, "目的地省份", required: false, scope: :user_info
     parameter :dest_city, "目的地城市", required: false, scope: :user_info
     parameter :province, "所在省份", required: false, scope: :user_info
@@ -54,6 +55,7 @@ resource "用户相关接口" do
     let(:nickname) { "测试名称" }
     let(:birth) {"2008-5-28"}
     let(:sex) {"female"}
+    let(:oversea) {false}
     let(:dest_province) {"上海"}
     let(:dest_city) {"上海"}
     let(:province) {"江苏"}
@@ -76,7 +78,7 @@ resource "用户相关接口" do
     example "用户修改自己的信息成功" do
       # puts params
       do_request
-      # puts response_body
+      puts response_body
       expect(status).to eq(200)
     end
   end
