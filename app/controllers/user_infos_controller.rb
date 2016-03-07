@@ -24,6 +24,7 @@
 #  flight              :string
 #  train               :string
 #  hotel_type          :integer
+#  oversea             :bool
 #
 # Indexes
 #
@@ -92,7 +93,7 @@ class UserInfosController < ApplicationController
 
     def user_info_params
       params.require(:user_info).permit(
-        :sex, :nickname, :birth, :dest_province, :dest_city,
+        :sex, :nickname, :birth, :dest_province, :dest_city, :oversea,
         :province, :city, :contact_type, :contact, :slogan,
         :avatar, :carreer, :flight, :train, :hotel_type,
         cover_image_attributes: [:id, :photo, :_destroy]

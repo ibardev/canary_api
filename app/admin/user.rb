@@ -15,7 +15,7 @@ ActiveAdmin.register User do
 
   permit_params :ban, :phone, :sms_token, :password, :password_confirmation, 
               user_info_attributes: 
-              [:nickname, :sex, :province, :city, :dest_province, :dest_city,
+              [:nickname, :sex, :province, :city, :dest_province, :dest_city, :oversea,
                 :slogan, :birth, :contact_type, :contact, :avatar  ]
 
   filter :phone

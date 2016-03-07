@@ -15,6 +15,7 @@ zh-CN:
         contact_type: "联系类型"
         contact: "联系方式"
         constellation: "星座"
+        oversea: "是否国外"
         age: "年龄"
       user_info:
         sex: "性别"
