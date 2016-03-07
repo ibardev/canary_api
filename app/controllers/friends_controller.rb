@@ -182,7 +182,7 @@ class FriendsController < ApplicationController
     @new_follow = current_user.get_user_count.try(:new_follow?)
     @new_respond = current_user.get_user_count.try(:new_respond?)
     @new_message = current_user.get_user_count.try(:new_message?)
-    @new_discover = current_user.get_user_count.try(:ner_discover?)
+    @new_discover = current_user.get_user_count.try(:new_discover?)
   end
 
   def new
