@@ -141,8 +141,33 @@ ActiveRecord::Schema.define(version: 20160307151514) do
 
   add_index "user_discovers", ["user_id"], name: "index_user_discovers_on_user_id"
 
-# Could not dump table "user_infos" because of following NoMethodError
-#   undefined method `[]' for nil:NilClass
+  create_table "user_infos", force: :cascade do |t|
+    t.integer  "sex"
+    t.string   "nickname"
+    t.date     "birth"
+    t.string   "dest_province"
+    t.string   "dest_city"
+    t.string   "province"
+    t.string   "city"
+    t.integer  "contact_type"
+    t.string   "contact"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.integer  "user_id"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.string   "slogan"
+    t.integer  "carreer"
+    t.string   "flight"
+    t.string   "train"
+    t.integer  "hotel_type"
+    t.boolean  "oversea"
+  end
+
+  add_index "user_infos", ["sex"], name: "index_user_infos_on_sex"
+  add_index "user_infos", ["user_id"], name: "index_user_infos_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

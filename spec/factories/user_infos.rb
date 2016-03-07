@@ -24,7 +24,7 @@
 #  flight              :string
 #  train               :string
 #  hotel_type          :integer
-#  oversea             :bool
+#  oversea             :boolean
 #
 # Indexes
 #
@@ -49,6 +49,7 @@ FactoryGirl.define do
     flight "航班"
     train "列车次"
     hotel_type "luxury"
+    oversea false
     association :cover_image, factory: :image
   end
 

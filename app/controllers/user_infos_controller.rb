@@ -24,7 +24,7 @@
 #  flight              :string
 #  train               :string
 #  hotel_type          :integer
-#  oversea             :bool
+#  oversea             :boolean
 #
 # Indexes
 #
