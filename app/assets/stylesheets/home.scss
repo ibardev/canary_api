@@ -4,3 +4,50 @@
 #home-carousel {
   max-width: 640px;
 }
+
+.home {
+  background-image: image_url("home/background.png");
+  background-size: 100% auto;
+  background-position: center top;
+  background-attachment: fixed;
+  padding-top: 60px;
+  padding-bottom: 20px;
+  .row {
+    margin: 0px;
+  }
+  .logo {
+    img {
+      width: 30%;
+    }
+  }
+  .intro {
+    margin-top: 30px;
+    img {
+      width: 45%;
+    }
+  }
+  .install {
+    margin-top: 60px;
+    img {
+      width: 55%;
+    }
+  }
+  .wechat {
+    margin-top: 60px;
+    img {
+      width: 40%;
+    }
+  }
+  .weibo {
+    margin-top: 10px;
+    img {
+      width: 40%;
+    }
+  }
+  .company {
+    margin-top: 50px;
+    img {
+      width: 30%;
+    }
+  }
+}

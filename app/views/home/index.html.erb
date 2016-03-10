@@ -1,27 +1,26 @@
-<div id="home-carousel" class="carousel slide" data-ride="carousel" data-interval="3000">
-  <!-- Indicators -->
-  <ol class="carousel-indicators">
-    <% (0..4).each do |index| %>
-      <li data-target="#home-carousel" data-slide-to=<%= index %> class="<%= "active" if index == 0 %>"></li>
-    <% end %>
-  </ol>
-
-  <!-- Wrapper for slides -->
-  <div class="carousel-inner" role="listbox">
-    <% (0..4).each do |index| %>
-      <div class="item <%= "active" if index == 0 %>">
-        <%= image_tag "home_#{index}.jpg" %>
-      </div>  
+<div class="home text-center">
+  <div class="row logo">
+    <%= image_tag "home/logo.png" %>
+  </div>
+  <div class="row intro">
+    <%= image_tag "home/intro.png" %>
+  </div>
+  <div class="row install">
+    <%= link_to 'https://itunes.apple.com/cn/app/lu-ke-chu-cha-lu-xing-lu-you/id1054431516?mt=8' do %>
+      <%= image_tag "home/install.png" %>
     <% end %>
   </div>
 
-  <!-- Controls -->
-  <a class="left carousel-control" href="#home-carousel" role="button" data-slide="prev">
-    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="right carousel-control" href="#home-carousel" role="button" data-slide="next">
-    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
+  <div class="row wechat">
+    <%= image_tag "home/wechat.png" %>
+  </div>
+
+  <div class="row weibo">
+    <%= image_tag "home/weibo.png" %>
+  </div>
+
+  <div class="row company">
+    <%= image_tag "home/company.png" %>
+  </div>
+
 </div>
