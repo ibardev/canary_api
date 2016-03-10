@@ -11,7 +11,7 @@
   background-position: center top;
   background-attachment: fixed;
   padding-top: 60px;
-  padding-bottom: 20px;
+  padding-bottom: 60px;
   .row {
     margin: 0px;
   }
@@ -32,20 +32,14 @@
       width: 55%;
     }
   }
-  .wechat {
-    margin-top: 60px;
-    img {
-      width: 40%;
-    }
-  }
-  .weibo {
-    margin-top: 10px;
+  .social {
+    margin-top: 50px;
     img {
       width: 40%;
     }
   }
   .company {
-    margin-top: 50px;
+    margin-top: 40px;
     img {
       width: 30%;
     }
