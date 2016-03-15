@@ -1,0 +1,39 @@
+.discover {
+  background-image: image_url("share/background.png");
+  background-size: 100% auto;
+  background-position: center top;
+  background-attachment: fixed;
+  padding-top: 60px;
+  padding-bottom: 60px;
+  .row {
+    margin: 0px;
+  }
+
+  .title {
+    img {
+      width: 90%;
+    }
+  }
+
+  .avatar {
+    img {
+      width: 100px;
+      height: 100px;
+    }
+  }
+
+  .detail {
+    background: #FEFFFF;
+    margin-top: -50px;
+    padding-top: 70px;
+    .name {
+      color: #000000;
+    }
+    .age {
+      color: #3B3B3B;
+    }
+    .constellation {
+      color: #3B3B3B;
+    }
+  }
+}

@@ -29,7 +29,7 @@ class UserCount < ActiveRecord::Base
   end
 
   def new_respond?
-    user.responders.first.try(:id).to_i > respond_index.to_i
+    user.invite_responds.first.try(:id).to_i > respond_index.to_i
   end
 
   def new_message?

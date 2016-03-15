@@ -158,7 +158,7 @@ class FriendsController < ApplicationController
     @current_page = responders.current_page
     @all_count = responders.count
     @friends = responders
-    current_user.get_user_count.update_attributes(respond_index: responders.try(:first).try(:id))
+    # current_user.get_user_count.update_attributes(respond_index: responders.try(:first).try(:id))
     respond_with @friends, template: "friends/vote_index"
   end
 
