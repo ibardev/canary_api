@@ -24,6 +24,8 @@ class InviteDiscover < ActiveRecord::Base
   has_many :votes, class_name: "ActsAsVotable::Vote", as: :votable
 
   after_create :add_discover
+  
+  default_scope { order('created_at DESC') }
 
   accepts_nested_attributes_for :images
 
