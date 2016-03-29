@@ -16,4 +16,7 @@
 #
 
 module InviteDiscoversHelper
+  def strfdate date
+    date.try(:strftime, '%Y.%m.%d')
+  end
 end

@@ -4,23 +4,38 @@
   </div>
 
   <div class="avatar">
-    <%= image_tag "share/title.png", class: "img-circle" %>
+    <%= image_tag @user_info.try(:avatar).try(:url, :medium), class: "img-circle" %>
   </div>
 
   <div class="detail">
-    <p class="name">咻咻</p>
+    <p class="name"><%= @user_info.try(:nickname) %></p>
     <p>
-      <span class="age">23</span>
-      <span class="constellation">天秤座</span>
+      <span class="age"><%= @user_info.try(:age) %></span>
+      <span class="constellation"><%= @user_info.try(:constellation) %></span>
+      <% pic_sex = @user_info.try(:sex) == "male" ? "boy" : "girl" %>
+      <%= image_tag "share/#{pic_sex}.png", class: "sex" %>
     </p>
     <p class="hint">Ta在旅客App发起了一条邀约，快来响应吧！</p>
     <div class="desc">
-      简单的驻足，随意的观望，还有对我以及我们富有永恒记忆的诞生：我穿着简单的驻足，随意的观望，还有对我以及我们富有永恒记忆的诞生：我穿着……
+      <%= @invite_discover.try(:content) %>
     </div>
-    <div class="foot">
-      <span class="pull-left">已有15人响应Ta</span>
-      <span class="pull-right">2015.09.24-2016.01.23</span>
-    </div>
+    <% if @invite_discover.images.any? %>
+      <% images = @invite_discover.images.first(4) %>
+      <div class="row pics">
+        <% images.each do |image| %>
+          <div class="col-xs-3 pic"><%= image_tag photo_url(image, :medium) %></div>  
+        <% end %>
+      </div>  
+    <% end %>
+    
+    <p class="foot">
+      <span class="pull-left">已有<%= @invite_discover.try(:respond_count).to_i %>人响应Ta</span>
+      <span class="pull-right"><%= "#{strfdate(@invite_discover.try(:begin_date))}-#{strfdate(@invite_discover.try(:end_date))}" %></span>
+    </p>
+  </div>
+
+  <div class="link">
+    <%= link_to "赶紧去看看", "http://www.lvkeapp.com" %>
   </div>
 
 

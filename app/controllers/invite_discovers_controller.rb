@@ -30,6 +30,8 @@ class InviteDiscoversController < ApplicationController
   end
 
   def show
+    @user_info = @invite_discover.try(:user).try(:user_info)
+
     respond_with(@invite_discover)
   end
 
