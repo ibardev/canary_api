@@ -137,6 +137,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def liked? friend
+    friend.voted_up_on? self, vote_scope: "like"
+  end
+
   def likes
     self.get_likes(vote_scope: "like").order('id DESC')
   end
