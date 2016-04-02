@@ -85,9 +85,9 @@ ActiveAdmin.register User do
     f.inputs "User Info", for: [:user_info, f.object.user_info || f.object.build_user_info] do |cf|
       user_info = f.object.user_info
       cf.input :nickname
-      cf.input :avatar, as: :file, hint: (user_info.avatar.blank?) \
-        ? cf.template.content_tag(:span, "no cover page yet")
-        : cf.template.link_to(image_tag(user_info.avatar.url(:medium)), user_info.avatar.url, target: "_blank")
+      # cf.input :avatar, as: :file, hint: (user_info.avatar.blank?) \
+      #   ? cf.template.content_tag(:span, "no cover page yet")
+      #   : cf.template.link_to(image_tag(user_info.avatar.url(:medium)), user_info.avatar.url, target: "_blank")
 
       cf.input :sex, as: :select, collection: UserInfo.sexes.keys
       cf.input :province
