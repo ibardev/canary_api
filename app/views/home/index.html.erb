@@ -11,6 +11,12 @@
     <% end %>
   </div>
 
+  <% unless @is_safari %>
+    <div class="row hint">
+      <%= image_tag "home/safari_hint.png" %>
+    </div>  
+  <% end %>
+  
   <div class="row social">
     <%= image_tag "home/social.png" %>
   </div>
