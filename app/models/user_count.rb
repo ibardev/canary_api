@@ -37,6 +37,6 @@ class UserCount < ActiveRecord::Base
   end
 
   def new_discover?
-    Discover.all.first.try(:id).to_i > discover_index.to_i
+    Discover.unblock.available.first.try(:id).to_i > discover_index.to_i
   end
 end
