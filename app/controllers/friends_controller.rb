@@ -116,7 +116,7 @@ class FriendsController < ApplicationController
     @current_page = followings.current_page
     @all_count = followings.count
     @friends = followings
-    current_user.get_user_count.update_attributes(follow_index: followings.try(:first).try(:id))
+    current_user.get_user_count.update_attributes(follow_index: followings.try(:first).try(:id)) if page.to_i == 1
     respond_with @friends, template: "friends/vote_index"
   end
 
@@ -146,7 +146,7 @@ class FriendsController < ApplicationController
     @current_page = likes.current_page
     @all_count = likes.count
     @friends = likes
-    current_user.get_user_count.update_attributes(like_index: likes.try(:first).try(:id))
+    current_user.get_user_count.update_attributes(like_index: likes.try(:first).try(:id)) if page.to_i == 1
     respond_with @friends, template: "friends/vote_index"
   end
 
@@ -169,7 +169,7 @@ class FriendsController < ApplicationController
     @total_pages = @invite_responds.total_pages
     @current_page = @invite_responds.current_page
     @all_count = @invite_responds.count
-    current_user.get_user_count.update_attributes(respond_index: @invite_responds.try(:first).try(:id))
+    current_user.get_user_count.update_attributes(respond_index: @invite_responds.try(:first).try(:id)) if page.to_i ==1
     respond_with @invite_responds
   end
 

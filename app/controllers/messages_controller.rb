@@ -20,7 +20,7 @@ class MessagesController < ApplicationController
     page = params[:page] || 1
     per_page = params[:per_page] || 10
     @messages = Message.all.paginate(page: page, per_page: per_page)
-    current_user.get_user_count.update_attributes(message_index: @messages.try(:first).try(:id))
+    current_user.get_user_count.update_attributes(message_index: @messages.try(:first).try(:id)) if page.to_i == 1
 
     respond_with(@messages)
   end
