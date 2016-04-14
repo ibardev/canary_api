@@ -30,9 +30,12 @@ class InviteDiscoversController < ApplicationController
   end
 
   def show
-    @user_info = @invite_discover.try(:user).try(:user_info)
-
-    respond_with(@invite_discover)
+    if @invite_discover.blank?
+      redirect_to root_path
+    else
+      @user_info = @invite_discover.try(:user).try(:user_info)
+      respond_with(@invite_discover)
+    end
   end
 
   def respond
@@ -86,7 +89,7 @@ class InviteDiscoversController < ApplicationController
 
   private
     def set_invite_discover
-      @invite_discover = InviteDiscover.find(params[:id])
+      @invite_discover = InviteDiscover.find_by(id: params[:id])
     end
 
     def set_self_invite_discover
