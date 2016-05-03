@@ -36,7 +36,7 @@ class UserInfosController < ApplicationController
 
   acts_as_token_authentication_handler_for User, except: [:check, :reset] 
 
-  before_action :set_user_info, only: [:show, :edit, :update, :count, :destroy]
+  before_action :set_user_info, only: [:show, :edit, :update, :count, :destroy, :modify]
 
   respond_to :html, :json
 
@@ -79,6 +79,12 @@ class UserInfosController < ApplicationController
     respond_with(@user_info) do |format|
       format.json { render :show }
     end
+  end
+
+  def modify
+    @user_info.avatar = String.new params[:avatar]
+    @user_info.save
+    respond_with(@user_info)
   end
 
   def destroy

@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     collection do
       post 'check'
       post 'reset'
+      post 'modify'
     end
     resources :pictures, only: [:index, :create] do
       collection do
