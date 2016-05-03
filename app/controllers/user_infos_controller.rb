@@ -82,9 +82,10 @@ class UserInfosController < ApplicationController
   end
 
   def modify
-    @user_info.avatar = params[:avatar]
-    @user_info.save
-    respond_with(@user_info)
+    @user_info.update(user_info_params)
+    respond_with(@user_info) do |format|
+      format.json { render :show }
+    end
   end
 
   def destroy
