@@ -82,7 +82,7 @@ class UserInfosController < ApplicationController
   end
 
   def modify
-    @user_info.avatar = StringIO.new params[:avatar]
+    @user_info.avatar = params[:avatar]
     @user_info.save
     respond_with(@user_info)
   end
