@@ -191,7 +191,7 @@ resource "用户相关接口" do
 
     parameter :pictures_attributes, "个人照片墙添加图片（单张）", require: true
 
-    # let(:pictures_attributes) { image_attrs }
+    let(:pictures_attributes) { image_attrs }
     before do
       @user = create(:user)
       @user.user_info.pictures.create(FactoryGirl.attributes_for(:image, photo_type: "pic"))

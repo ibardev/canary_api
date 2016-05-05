@@ -57,7 +57,7 @@ resource "发现相关接口" do
     end
 
     let(:id) { @invite_discovers.first.id }
-    # let(:images_attributes) { image_attrs }
+    let(:images_attributes) { image_attrs }
 
     example "用户上传单张邀约的图片" do
       do_request
