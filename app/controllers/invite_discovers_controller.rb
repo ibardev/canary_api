@@ -19,7 +19,7 @@ class InviteDiscoversController < ApplicationController
 
   acts_as_token_authentication_handler_for User, except: [:show] 
 
-  before_action :set_invite_discover, only: [:show, :respond, :unrespond, :responds]
+  before_action :set_invite_discover, only: [:show, :respond, :unrespond, :responds, :append]
   before_action :set_self_invite_discover, only: [:edit, :update, :destroy]
 
   respond_to :html, :json
@@ -77,6 +77,12 @@ class InviteDiscoversController < ApplicationController
     end
   end
 
+  def append
+    @invite_discover.images.build picture_params[:images_attributes]
+    @invite_discover.save
+    respond_with(@invite_discover, template: "invite_discovers/show", status: 201)
+  end
+
   def update
     @invite_discover.update(invite_discover_params)
     respond_with(@invite_discover)
@@ -102,6 +108,12 @@ class InviteDiscoversController < ApplicationController
     def invite_discover_params
       params.require(:invite_discover).permit(
         :begin_date, :end_date, :content,
+        images_attributes: [:id, :photo, :_destroy]
+        )
+    end
+
+    def picture_params
+      params.require(:invite_discover).permit(
         images_attributes: [:id, :photo, :_destroy]
         )
     end

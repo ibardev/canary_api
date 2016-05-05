@@ -32,6 +32,7 @@ Rails.application.routes.draw do
     resources :pictures, only: [:index, :create] do
       collection do
         post 'delete'
+        post 'append'
       end
     end
     resources :messages, only: [:index]
@@ -79,6 +80,7 @@ Rails.application.routes.draw do
       post 'respond'
       post 'unrespond'
       get 'responds'
+      post 'append'
     end
   end
   resources :discovers, only: [:index]

@@ -170,7 +170,28 @@ resource "用户相关接口" do
     parameter :pictures_attributes, "个人照片墙图片", require: true
 
     # let(:pictures_attributes) { [image_attrs, image_attrs] }
+    before do
+      @user = create(:user)
+      @user.user_info.pictures.create(FactoryGirl.attributes_for(:image, photo_type: "pic"))
+    end
 
+    example "用户更新个人照片墙图片" do
+      do_request
+      puts response_body
+      expect(status).to eq(201)
+    end
+  end
+
+  post 'user_info/pictures/append' do
+    user_attrs = FactoryGirl.attributes_for(:user)
+    user_info_attrs = FactoryGirl.attributes_for(:user_info)
+    header "X-User-Token", user_attrs[:authentication_token]
+    header "X-User-Phone", user_attrs[:phone]
+    image_attrs = FactoryGirl.attributes_for(:image, photo_type: "pic")
+
+    parameter :pictures_attributes, "个人照片墙添加图片（单张）", require: true
+
+    # let(:pictures_attributes) { image_attrs }
     before do
       @user = create(:user)
       @user.user_info.pictures.create(FactoryGirl.attributes_for(:image, photo_type: "pic"))

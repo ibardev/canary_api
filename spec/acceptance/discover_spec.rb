@@ -39,6 +39,33 @@ resource "发现相关接口" do
 
   end
 
+  post "invite_discovers/:id/append" do
+    user_attrs = FactoryGirl.attributes_for(:user)
+    user_info_attrs = FactoryGirl.attributes_for(:user_info)
+    image_attrs = FactoryGirl.attributes_for(:image)
+
+    header "X-User-Token", user_attrs[:authentication_token]
+    header "X-User-Phone", user_attrs[:phone]
+
+    parameter :images_attributes, "邀约图片", required: true, scope: :invite_discover
+
+    before do
+      @user = create(:user)
+      @user.user_info.update_attributes(user_info_attrs)
+      @invite_discovers = create_list(:invite_discover, 3, user: @user)
+      @user_discovers = create_list(:user_discover, 3, user: @user)
+    end
+
+    let(:id) { @invite_discovers.first.id }
+    # let(:images_attributes) { image_attrs }
+
+    example "用户上传单张邀约的图片" do
+      do_request
+      puts response_body
+      expect(status).to eq(201)
+    end
+  end
+
   get "discovers" do
     user_attrs = FactoryGirl.attributes_for(:user)
     user_info_attrs = FactoryGirl.attributes_for(:user_info)

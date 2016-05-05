@@ -23,6 +23,13 @@ class PicturesController < ApplicationController
   def edit
   end
 
+  def append
+    current_user_info.pictures.build picture_params[:pictures_attributes]
+    current_user_info.save
+    @pictures = current_user_info.pictures
+    respond_with(@pictures, template: "pictures/index", status: 201)
+  end
+
   def create
     current_user_info.update(picture_params)
     current_user_info.save
