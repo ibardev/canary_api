@@ -26,6 +26,7 @@ class PicturesController < ApplicationController
   def append
     current_user_info.pictures.build picture_params[:pictures_attributes]
     current_user_info.save
+    current_user_info.reload
     @pictures = current_user_info.pictures
     respond_with(@pictures, template: "pictures/index", status: 201)
   end

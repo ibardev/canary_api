@@ -80,6 +80,7 @@ class InviteDiscoversController < ApplicationController
   def append
     @invite_discover.images.build picture_params[:images_attributes]
     @invite_discover.save
+    @invite_discover.reload
     respond_with(@invite_discover, template: "invite_discovers/show", status: 201)
   end
 
