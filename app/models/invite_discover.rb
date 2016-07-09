@@ -84,5 +84,6 @@ class InviteDiscover < ActiveRecord::Base
   private
     def add_discover
       self.create_discover user: user, block: false
+      self.user.user_count.update_attributes(discover_at: Time.zone.now)
     end
 end

@@ -175,6 +175,10 @@ class User < ActiveRecord::Base
     Complain.where(source_compainer: user_info).count
   end
 
+  def can_discover?
+    Time.zone.now - self.user_count.try(:discover_at) > 7.day
+  end
+
   ############################################
   # user counts
   def like_count

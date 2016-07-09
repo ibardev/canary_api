@@ -69,12 +69,17 @@ class InviteDiscoversController < ApplicationController
   end
 
   def create
-    @invite_discover = InviteDiscover.new(invite_discover_params)
-    @invite_discover.user = current_user
-    @invite_discover.save
-    respond_with(@invite_discover) do |format|
-      format.json { render :show }
+    if current_user.can_discover?
+      @invite_discover = InviteDiscover.new(invite_discover_params)
+      @invite_discover.user = current_user
+      @invite_discover.save
+      respond_with(@invite_discover) do |format|
+        format.json { render :show }
+      end
+    else
+      render json: { errors: "一周内只能发一次邀约" }, status: 422
     end
+    
   end
 
   def append

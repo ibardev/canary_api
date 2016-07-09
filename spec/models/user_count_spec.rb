@@ -11,6 +11,7 @@
 #  updated_at     :datetime         not null
 #  message_index  :integer
 #  discover_index :integer
+#  discover_at    :datetime
 #
 # Indexes
 #
