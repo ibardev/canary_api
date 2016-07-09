@@ -176,7 +176,7 @@ class User < ActiveRecord::Base
   end
 
   def can_discover?
-    Time.zone.now - self.user_count.try(:discover_at) > 7.day
+    self.user_count.try(:discover_at).blank? || Time.zone.now - self.user_count.try(:discover_at) > 7.day
   end
 
   ############################################

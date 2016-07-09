@@ -39,6 +39,35 @@ resource "发现相关接口" do
 
   end
 
+  get "invite_discovers/validate" do
+    user_attrs = FactoryGirl.attributes_for(:user)
+    user_info_attrs = FactoryGirl.attributes_for(:user_info)
+    image_attrs = FactoryGirl.attributes_for(:image)
+
+    header "X-User-Token", user_attrs[:authentication_token]
+    header "X-User-Phone", user_attrs[:phone]
+
+    before do
+      @user = create(:user)
+      @user.user_info.update_attributes(user_info_attrs)
+    end
+
+    example "用户校验是否可以发布邀约成功" do
+      do_request
+      puts response_body
+      expect(status).to eq 200
+    end
+
+    example "用户校验是否可以发布邀约失败" do
+      @invite_discover = create(:invite_discover, user: @user)
+      do_request
+      puts response_body
+      expect(status).to eq 422
+    end
+  end
+
+
+
   post "invite_discovers/:id/append" do
     user_attrs = FactoryGirl.attributes_for(:user)
     user_info_attrs = FactoryGirl.attributes_for(:user_info)

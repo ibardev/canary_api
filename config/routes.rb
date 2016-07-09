@@ -82,6 +82,9 @@ Rails.application.routes.draw do
       get 'responds'
       post 'append'
     end
+    collection do
+      get 'validate'
+    end
   end
   resources :discovers, only: [:index]
 

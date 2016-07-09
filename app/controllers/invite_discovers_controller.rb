@@ -68,16 +68,28 @@ class InviteDiscoversController < ApplicationController
   def edit
   end
 
+  def validate
+    if !current_user.can_discover?
+      render json: { errors: "一周内只能发一次邀约" }, status: 422
+    elsif current_user.user_info.avatar.blank?
+      render json: { errors: "请先上传头像" }, status: 422
+    else
+      render json: {}, status: 200
+    end
+  end
+
   def create
-    if current_user.can_discover?
+    if !current_user.can_discover?
+      render json: { errors: "一周内只能发一次邀约" }, status: 422
+    elsif current_user.user_info.avatar.blank?
+      render json: { errors: "请先上传头像" }, status: 422
+    else
       @invite_discover = InviteDiscover.new(invite_discover_params)
       @invite_discover.user = current_user
       @invite_discover.save
       respond_with(@invite_discover) do |format|
         format.json { render :show }
       end
-    else
-      render json: { errors: "一周内只能发一次邀约" }, status: 422
     end
     
   end
