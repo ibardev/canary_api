@@ -100,4 +100,49 @@ class UserInfo < ActiveRecord::Base
       "摩羯座"
     end
   end
+
+  Regions = [
+    "北京", "天津", "河北", "山西", "内蒙古", "辽宁", "吉林", "黑龙江",
+    "上海", "江苏", "浙江", "安徽", "福建", "江西", "山东", "河南", "湖北", "湖南",
+    "广东", "广西", "海南", "重庆", "四川", "贵州", "云南", "西藏", "陕西", "甘肃",
+    "青海", "宁夏", "新疆"
+  ]
+
+  def self.import csv_file
+    CSV.foreach(csv_file, encoding: 'gbk') do |row|
+      # 角标
+      id = row[0].to_i
+      phone = "172000#{row[0].rjust(5, '0')}"
+      wechat, qq, province, city = ""
+      next unless id > 0
+      if row[1].include? "微信"
+        contact_type = "wechat"
+        contact = row[1].sub("微信", "")
+      else
+        contact_type = "qq"
+        contact = row[1]
+      end
+
+      Regions.each do |region|
+        if row[2].start_with? region
+          province = region
+          city = row[2].sub(region, "")
+          break
+        end
+      end
+      birth = Date.parse row[3]
+
+      user = User.where(phone: phone).first_or_create do |u|
+        u.password = "12341234"
+        u.ban = true
+        u.sms_token = "1981"
+      end
+      
+      # user = User.create(phone: phone, password: "12341234", ban: true, sms_token: "1981")
+      user.user_info.update_attributes(contact_type: contact_type,  contact: contact, sex: "female", 
+        province: province, city: city, birth: birth, hotel_type: "commercial")
+
+    end
+  end
+
 end
