@@ -41,6 +41,14 @@ ActiveAdmin.register UserInfo do
     column :sex
     column :age
     column :ban
+    column "Ban Action" do |user_info|
+      user = user_info.user
+      if user.banned?
+        link_to "取消封禁", unban_admin_user_path(user), method: :post
+      else
+        link_to "封禁用户", ban_admin_user_path(user), method: :post
+      end
+    end
     column :city do |user|
       "#{user.province}-#{user.city}"
     end

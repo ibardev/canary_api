@@ -28,12 +28,12 @@ ActiveAdmin.register User do
 
   member_action :ban, method: :post do
     resource.ban!
-    redirect_to collection_path, notice: "Ban user success!"
+    redirect_to :back, notice: "Ban user success!"
   end
 
   member_action :unban, method: :post do
     resource.unban!
-    redirect_to collection_path, notice: "Unban user success!"
+    redirect_to :back, notice: "Unban user success!"
   end
 
   index do
