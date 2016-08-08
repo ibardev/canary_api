@@ -19,6 +19,8 @@ class InviteDiscoversController < ApplicationController
 
   acts_as_token_authentication_handler_for User, except: [:show] 
 
+  wechat_api
+
   before_action :set_invite_discover, only: [:show, :respond, :unrespond, :responds, :append]
   before_action :set_self_invite_discover, only: [:edit, :update, :destroy]
 
@@ -30,6 +32,7 @@ class InviteDiscoversController < ApplicationController
   end
 
   def show
+    @title = "Ta在旅客App发起了一条邀约，快来响应吧！"
     if @invite_discover.blank?
       redirect_to root_path
     else

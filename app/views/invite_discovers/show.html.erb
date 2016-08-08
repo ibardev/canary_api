@@ -42,4 +42,32 @@
 
 </div>
 
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<%= wechat_config_js debug: false, api: %w(onMenuShareTimeline onMenuShareAppMessage) -%>
+<script type="application/javascript">
+  wx.ready(function() {
+    wx.onMenuShareTimeline({
+      title:  <%= @invite_discover.try(:content) %>, // 分享标题
+      link: <%= invite_discover_url(@invite_discover) %>, // 临时url
+      imgUrl: <%= @user_info.try(:avatar).try(:url, :medium) %>, // 分享图标
+      success: function () {
+      },
+      cancel: function () {
+      }
+    });
 
+    wx.onMenuShareAppMessage({
+      title: 'Ta在旅客App发起了一条邀约，快来响应吧！', // 分享标题
+      desc: <%= @invite_discover.try(:content) %>, // 分享标题
+      link: <%= invite_discover_url(@invite_discover) %>, // 临时url
+      imgUrl: <%= @user_info.try(:avatar).try(:url, :medium) %>, // 分享图标
+      type: '', // 分享类型,music、video或link，不填默认为link
+      dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+      success: function () {
+      },
+      cancel: function () {
+      }
+    });
+  });
+  
+</script>

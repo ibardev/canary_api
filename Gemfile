@@ -78,6 +78,10 @@ gem 'select2-rails'
 # ActiveAdmin Select2 integration
 gem 'activeadmin-select2'
 
+# API, command and message handling for WeChat in Rails
+# https://github.com/Eric-Guo/wechat
+gem 'wechat'
+
 ##########################################################################################
 
 # Use ActiveModel has_secure_password
