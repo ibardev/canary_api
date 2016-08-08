@@ -3,8 +3,10 @@ default: &default
   # corpsecret: "corpsecret"
   # agentid:  1
 # Or if using public account, only need above two line
-  appid: "wx800a0eaa11046012"
-  secret: "2ab62d301d6135784194bba2afe3b941"
+  appid: 'wx413efe0aeecdc878'
+  secret: '6a6e949f8faa3220da648fc4fbe0dda1'
+  # appid: "wx305a09c122bede2b"
+  # secret: "02a6bef87ec4c2d6cf993e36bd58d094"
   token:    "71f72bcb9f99bfb2a6635c30"
   # access_token: "C:/Users/[username]/wechat_access_token"
   encrypt_mode: false # if true must fill encoding_aes_key
