@@ -5,7 +5,7 @@ class HomeController < ApplicationController
   def index
 
     connection = Faraday::Connection.new "http://wechat-api.tallty.com"
-    response = connection.get '/lvke_wechat/js_hash.json', { page_url: "http://www.lvkeapp.com/" }
+    response = connection.post '/lvke_wechat/js_hash.json', { page_url: "http://www.lvkeapp.com/" }
     logger.info "response is:#{MultiJson.load response.body}"
 
     @js_hash = MultiJson.load response.body
