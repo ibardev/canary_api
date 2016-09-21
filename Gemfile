@@ -24,6 +24,9 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
+# Simple, but flexible HTTP client library, with support for multiple backends.
+# Read more: https://github.com/lostisland/faraday
+gem 'faraday'
 
 ##########################################################################################
 # Authentication

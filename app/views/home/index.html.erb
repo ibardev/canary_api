@@ -32,6 +32,16 @@
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 <%= wechat_config_js debug: false, api: %w(onMenuShareTimeline onMenuShareAppMessage) -%>
 <script type="application/javascript">
+  wx.config({
+    debug: false,
+    appId: "wx413efe0aeecdc878",
+    timestamp: '<%= @js_hash["timestamp"] %>',
+    nonceStr: '<%= @js_hash["noncestr"] %>',
+    signature: '<%= @js_hash["signature"] %>',
+    jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage']
+  });
+</script>
+<script type="application/javascript">
   wx.ready(function() {
     wx.onMenuShareTimeline({
       title:  '欢迎下载旅客App', // 分享标题
