@@ -28,3 +28,33 @@
   </div>
 
 </div>
+
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<%= wechat_config_js debug: false, api: %w(onMenuShareTimeline onMenuShareAppMessage) -%>
+<script type="application/javascript">
+  wx.ready(function() {
+    wx.onMenuShareTimeline({
+      title:  '欢迎下载旅客App', // 分享标题
+      link: 'http://www.lvkeapp.com', // 临时url
+      imgUrl: 'http://www.lvkeapp.com/assets/home_0-0d3a28afe467a6a2712305aa0a86aa113cb6b8c701534680682530852bc16fb9.jpg', // 分享图标
+      success: function () {
+      },
+      cancel: function () {
+      }
+    });
+
+    wx.onMenuShareAppMessage({
+      title: '欢迎下载旅客App', // 分享标题pp
+      desc: '欢迎下载旅客App', // 分享标题
+      link: 'http://www.lvkeapp.com', // 临时url
+      imgUrl: 'http://www.lvkeapp.com/assets/home_0-0d3a28afe467a6a2712305aa0a86aa113cb6b8c701534680682530852bc16fb9.jpg', // 分享图标
+      type: '', // 分享类型,music、video或link，不填默认为link
+      dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+      success: function () {
+      },
+      cancel: function () {
+      }
+    });
+  });
+  
+</script>
