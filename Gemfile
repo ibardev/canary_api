@@ -1,5 +1,5 @@
 # source 'https://rubygems.org'
-source 'https://ruby.taobao.org'
+source 'https://gems.ruby-china.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -90,9 +90,8 @@ gem 'wechat'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-# Use Unicorn as the app server
-gem 'unicorn'
-
+# Use puma as the app server
+gem 'puma', '~> 2.15.3'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
