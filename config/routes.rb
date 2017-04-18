@@ -23,6 +23,9 @@ Rails.application.routes.draw do
   ######################################################
   # User Routes
   devise_for :users
+  namespace :wechat do
+    resource :session, only: [:create]
+  end
 
   resource :user_info, only: [:show, :update] do
     collection do

@@ -4,6 +4,38 @@ resource "用户注册登录" do
   header "Accept", "application/json"
   header "Content-Type", "application/json"
 
+  post "wechat/session" do
+    parameter :openid, "微信的openid", required: true, scope: :wechat
+
+    context "微信用户第一次登录" do
+      let(:openid) { "wechatopenid" }
+      let(:raw_post) { params.to_json }
+
+      example "微信用户登录成功" do
+        do_request
+        puts response_body
+        expect(status).to eq(201)
+      end
+    end
+
+    context "微信用户之前已经登录注册过" do
+      before do
+        @user = create(:user, phone: "wechatopenid")
+      end
+
+      let(:openid) { "wechatopenid" }
+      let(:raw_post) { params.to_json }
+
+      example "微信用户登录成功" do
+        do_request
+        puts response_body
+        expect(status).to eq(201)
+      end
+
+    end
+
+  end
+
   post "/users" do
     parameter :phone, "用户注册的手机号码", required: true, scope: :user
     parameter :password, "用户注册的密码", required: true, scope: :user
